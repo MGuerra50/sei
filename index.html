@@ -898,7 +898,7 @@
         <nav class="nav" aria-label="Principal">
           <a href="#projetos">Projetos</a>
           <a href="#servicos">Serviços</a>
-          <a href="#sobre">Sobre</a>
+          <a href="#missao-visao-valores">Sobre</a>
           <a href="#contato">Contato</a>
         </nav>
 
@@ -938,7 +938,7 @@
       <nav class="mobile-nav" id="mobile-nav" aria-label="Menu mobile">
         <a href="#projetos">Projetos</a>
         <a href="#servicos">Serviços</a>
-        <a href="#sobre">Sobre</a>
+        <a href="#missao-visao-valores">Sobre</a>
         <a href="#contato">Contato</a>
         <a href="tel:+551134567890">
           <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:inline;vertical-align:-2px;margin-right:0.4rem">
@@ -1104,6 +1104,38 @@
 
         document.addEventListener("keydown", (event) => {
           if (event.key === "Escape") closeContact();
+        });
+      }
+
+      const scrollToSobreFinal = () => {
+        const section = document.querySelector(".sobre");
+        if (!section) return;
+
+        if (section.classList.contains("is-static")) {
+          document.getElementById("missao-visao-valores")?.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+          return;
+        }
+
+        // Final da trilha de scroll = layout do print (imagem moldura + cards)
+        const sectionTop = section.getBoundingClientRect().top + window.scrollY;
+        const top = sectionTop + section.offsetHeight - window.innerHeight;
+        window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+      };
+
+      document.querySelectorAll('a[href="#missao-visao-valores"]').forEach((link) => {
+        link.addEventListener("click", (event) => {
+          event.preventDefault();
+          scrollToSobreFinal();
+          history.pushState(null, "", "#missao-visao-valores");
+        });
+      });
+
+      if (window.location.hash === "#missao-visao-valores") {
+        requestAnimationFrame(() => {
+          setTimeout(scrollToSobreFinal, 50);
         });
       }
 
@@ -1281,6 +1313,7 @@
       opacity: 0;
       transform: translateY(20px);
       will-change: opacity, transform;
+      scroll-margin-top: 5rem;
     }
 
     .sobre__title-card h2 {
@@ -1594,7 +1627,7 @@
       </div>
 
       <div class="sobre__panel">
-        <div class="sobre__title-card">
+        <div class="sobre__title-card" id="missao-visao-valores">
           <h2>Missão, Visão e Valores</h2>
         </div>
 
