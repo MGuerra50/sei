@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Sobre a Simões Engenharia & Interiores — transparência, excelência técnica e estética exclusiva." />
+  <title>Sobre — Simões Engenharia & Interiores</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #f5f4f1;
+      --bg-card: #ebe9e4;
+      --text: #141414;
+      --text-muted: rgba(20, 20, 20, 0.62);
+      --accent: #c4a574;
+      --radius-img: clamp(1.25rem, 2.2vw, 2rem);
+      --radius-card: clamp(1rem, 1.6vw, 1.35rem);
+      --radius-pill: 999px;
+      --gutter: clamp(1rem, 3.5vw, 3.5rem);
+      --max: 92rem;
+      --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(20, 20, 20, 0.35) transparent;
+    }
+
+    html::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    html::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    html::-webkit-scrollbar-thumb {
+      background: rgba(20, 20, 20, 0.35);
+      border-radius: 999px;
+    }
+
+    html::-webkit-scrollbar-thumb:hover {
+      background: rgba(20, 20, 20, 0.5);
+    }
+
+    body {
+      font-family: "Outfit", sans-serif;
+      background: #0a0c0f;
+      color: var(--text);
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+      color: inherit;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    /* ——— Scroll track + sticky stage ——— */
+    .sobre {
+      position: relative;
+      height: 180vh;
+      background: var(--bg);
+    }
+
+    .sobre__stage {
+      position: sticky;
+      top: 0;
+      height: 100dvh;
+      width: 100%;
+      overflow: hidden;
+      background: var(--bg);
+      isolation: isolate;
+    }
+
+    /* Imagem: começa full-bleed e morph para o slot esquerdo */
+    .sobre__media {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      overflow: hidden;
+      border-radius: 0;
+      background:
+        linear-gradient(145deg, #2a2e34 0%, #1a1d22 45%, #3d3428 100%);
+      will-change: inset, border-radius, width, height, top, left, right, bottom;
+    }
+
+    .sobre__media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    /* Painel de conteúdo (direita + CTA) */
+    .sobre__panel {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+      grid-template-rows: auto 1fr auto;
+      gap: clamp(0.75rem, 1.4vw, 1.15rem);
+      padding: clamp(1.25rem, 3vw, 2.5rem) var(--gutter);
+      width: min(100%, var(--max));
+      margin-inline: auto;
+      pointer-events: none;
+    }
+
+    .sobre__panel > * {
+      pointer-events: auto;
+    }
+
+    .sobre__title-card {
+      grid-column: 1 / -1;
+      grid-row: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: clamp(0.85rem, 1.4vw, 1.15rem) clamp(1.25rem, 2vw, 1.75rem);
+      border-radius: 0;
+      background: transparent;
+      opacity: 0;
+      transform: translateY(20px);
+      will-change: opacity, transform;
+    }
+
+    .sobre__title-card h2 {
+      font-family: "Syne", sans-serif;
+      font-size: clamp(1.35rem, 2.8vw, 2.15rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      color: #141414;
+      text-align: center;
+    }
+
+    .sobre__spacer {
+      grid-column: 1;
+      grid-row: 2;
+      min-height: 0;
+    }
+
+    .sobre__cards {
+      grid-column: 2;
+      grid-row: 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: clamp(0.75rem, 1.2vw, 1rem);
+      min-height: 0;
+      align-self: stretch;
+    }
+
+    .sobre__card {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      padding: clamp(1.15rem, 1.8vw, 1.6rem);
+      border-radius: var(--radius-card);
+      background: var(--bg-card);
+      opacity: 0;
+      transform: translateY(28px);
+      will-change: opacity, transform;
+    }
+
+    .sobre__card:nth-child(3) {
+      grid-column: 1 / -1;
+    }
+
+    .sobre__card-icon {
+      width: 1.45rem;
+      height: 1.45rem;
+      color: var(--text);
+      opacity: 0.9;
+    }
+
+    .sobre__card-icon svg {
+      width: 100%;
+      height: 100%;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.6;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .sobre__card h3 {
+      font-family: "Syne", sans-serif;
+      font-size: clamp(1.15rem, 1.8vw, 1.55rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+    }
+
+    .sobre__card p {
+      font-size: clamp(0.85rem, 1.05vw, 0.98rem);
+      font-weight: 300;
+      color: var(--text-muted);
+      line-height: 1.5;
+      max-width: none;
+    }
+
+    .sobre__cta {
+      grid-column: 1 / -1;
+      grid-row: 3;
+      display: flex;
+      align-items: center;
+      padding-top: 0.25rem;
+      opacity: 0;
+      transform: translateY(24px);
+      will-change: opacity, transform;
+    }
+
+    .sobre__cta-text {
+      font-family: "Syne", sans-serif;
+      font-size: clamp(1.15rem, 2.2vw, 1.75rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      max-width: 42ch;
+    }
+
+    /* Estado final estático (reduced motion / fallback) */
+    .sobre.is-static {
+      height: auto;
+    }
+
+    .sobre.is-static .sobre__stage {
+      position: relative;
+      height: auto;
+      min-height: 100dvh;
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+      grid-template-rows: auto 1fr auto;
+      gap: clamp(0.75rem, 1.4vw, 1.15rem);
+      padding: clamp(1.5rem, 4vh, 3rem) var(--gutter);
+      width: min(100%, var(--max));
+      margin-inline: auto;
+      overflow: visible;
+    }
+
+    .sobre.is-static .sobre__media {
+      position: relative;
+      inset: auto;
+      grid-column: 1;
+      grid-row: 2;
+      width: 100%;
+      height: 100%;
+      min-height: min(64vh, 32rem);
+      border-radius: var(--radius-img);
+    }
+
+    .sobre.is-static .sobre__panel {
+      position: contents;
+    }
+
+    .sobre.is-static .sobre__title-card {
+      grid-column: 1 / -1;
+      grid-row: 1;
+      opacity: 1;
+      transform: none;
+    }
+
+    .sobre.is-static .sobre__spacer {
+      display: none;
+    }
+
+    .sobre.is-static .sobre__cards {
+      grid-column: 2;
+      grid-row: 2;
+      opacity: 1;
+      transform: none;
+    }
+
+    .sobre.is-static .sobre__card {
+      opacity: 1;
+      transform: none;
+    }
+
+    .sobre.is-static .sobre__cta {
+      grid-column: 1 / -1;
+      grid-row: 3;
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ——— Responsive ——— */
+    @media (max-width: 999px) {
+      .sobre {
+        height: 170vh;
+      }
+
+      .sobre__panel {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto;
+        align-content: start;
+        padding-bottom: clamp(1.25rem, 3vh, 2rem);
+      }
+
+      .sobre__spacer {
+        display: none;
+      }
+
+      .sobre__cards {
+        grid-column: 1;
+        grid-row: 2;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto;
+      }
+
+      .sobre__cta {
+        grid-column: 1;
+        grid-row: 3;
+      }
+
+      .sobre.is-static .sobre__stage {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto auto;
+      }
+
+      .sobre.is-static .sobre__title-card {
+        grid-row: 1;
+      }
+
+      .sobre.is-static .sobre__media {
+        grid-column: 1;
+        grid-row: 2;
+        min-height: min(42vh, 22rem);
+        height: min(42vh, 22rem);
+      }
+
+      .sobre.is-static .sobre__cards {
+        grid-column: 1;
+        grid-row: 3;
+      }
+
+      .sobre.is-static .sobre__cta {
+        grid-column: 1;
+        grid-row: 4;
+      }
+    }
+
+    @media (max-width: 639px) {
+      .sobre {
+        height: 160vh;
+      }
+
+      .sobre__cards {
+        grid-template-columns: 1fr;
+      }
+
+      .sobre__card:nth-child(3) {
+        grid-column: 1;
+      }
+
+      .sobre.is-static .sobre__media {
+        min-height: min(36vh, 16rem);
+        height: min(36vh, 16rem);
+      }
+    }
+
+    @media (min-width: 1600px) {
+      :root {
+        --max: 110rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .sobre__media,
+      .sobre__title-card,
+      .sobre__card,
+      .sobre__cta {
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <section class="sobre" id="sobre" aria-label="Sobre a Simões Engenharia & Interiores">
+    <div class="sobre__stage">
+      <div class="sobre__media" aria-hidden="true">
+        <img
+          src="assets/sobre.webp"
+          alt=""
+          width="1600"
+          height="2000"
+          decoding="async"
+          fetchpriority="low"
+          onerror="this.style.display='none'"
+        />
+      </div>
+
+      <div class="sobre__panel">
+        <div class="sobre__title-card">
+          <h2>Missão, Visão e Valores</h2>
+        </div>
+
+        <div class="sobre__spacer" aria-hidden="true"></div>
+
+        <div class="sobre__cards">
+          <article class="sobre__card">
+            <span class="sobre__card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z" /><circle cx="12" cy="12" r="3" /></svg>
+            </span>
+            <h3>Visão Compartilhada</h3>
+            <p>Mais do que gerenciar prazos e relatórios, nós capturamos a essência do seu desejo. Traduzimos suas expectativas em transparência absoluta, garantindo que a jornada de construir o seu espaço seja tão leve e gratificante quanto o dia da entrega das chaves.</p>
+          </article>
+
+          <article class="sobre__card">
+            <span class="sobre__card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z" /></svg>
+            </span>
+            <h3>A Solidez de um Legado</h3>
+            <p>O rigor técnico e os cálculos exatos são os pilares que sustentam a sua paz. Moldamos a engenharia de alto padrão para dar base sólida aos seus maiores planos, transformando estruturas complexas no porto seguro que sua família merece.</p>
+          </article>
+
+          <article class="sobre__card">
+            <span class="sobre__card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" /><path d="M3 9h18M9 21V9" /></svg>
+            </span>
+            <h3>O Cenário do Seu Próximo Capítulo</h3>
+            <p>Projetar interiores é materializar a sua identidade em cada textura, luz e contorno. Criamos refúgios exclusivos e sofisticados que ressoam com a sua alma, transformando ambientes em santuários de conforto onde os seus melhores momentos vão ganhar vida.</p>
+          </article>
+        </div>
+
+        <div class="sobre__cta">
+          <p class="sobre__cta-text">Transformamos conceitos em realidade</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const section = document.querySelector(".sobre");
+      const media = document.querySelector(".sobre__media");
+      const titleCard = document.querySelector(".sobre__title-card");
+      const cards = gsap.utils.toArray(".sobre__card");
+      const cta = document.querySelector(".sobre__cta");
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      if (!section || !media || typeof gsap === "undefined" || typeof ScrollTrigger === "undefined" || reduceMotion) {
+        section?.classList.add("is-static");
+        return;
+      }
+
+      gsap.registerPlugin(ScrollTrigger);
+
+      const mm = gsap.matchMedia();
+
+      mm.add(
+        {
+          isDesktop: "(min-width: 1000px)",
+          isTablet: "(min-width: 640px) and (max-width: 999px)",
+          isMobile: "(max-width: 639px)",
+        },
+        (context) => {
+          const { isDesktop, isTablet } = context.conditions;
+
+          gsap.set(titleCard, { opacity: 0, y: 20 });
+          gsap.set(cards, { opacity: 0, y: 28 });
+          gsap.set(cta, { opacity: 0, y: 24 });
+          gsap.set(media, {
+            top: "0%",
+            left: "0%",
+            right: "0%",
+            bottom: "0%",
+            borderRadius: "0px",
+          });
+
+          const endState = isDesktop
+            ? {
+                top: "16%",
+                left: "3.5%",
+                right: "52%",
+                bottom: "18%",
+                borderRadius: "32px",
+              }
+            : isTablet
+              ? {
+                  top: "14%",
+                  left: "4%",
+                  right: "4%",
+                  bottom: "50%",
+                  borderRadius: "24px",
+                }
+              : {
+                  top: "12%",
+                  left: "4%",
+                  right: "4%",
+                  bottom: "56%",
+                  borderRadius: "20px",
+                };
+
+          const tl = gsap.timeline({
+            defaults: { ease: "none" },
+            scrollTrigger: {
+              trigger: section,
+              start: "top top",
+              end: "bottom bottom",
+              scrub: 0.65,
+              invalidateOnRefresh: true,
+            },
+          });
+
+          // 0 → 50%: imagem permanece full-bleed
+          tl.to({}, { duration: 1 });
+
+          // 51 → 100%: branco cobre laterais; imagem vira moldura
+          tl.to(media, { ...endState, duration: 1 }, 1);
+
+          tl.to(
+            titleCard,
+            { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" },
+            1.3
+          );
+
+          tl.to(
+            cards,
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.45,
+              stagger: 0.08,
+              ease: "power2.out",
+            },
+            1.45
+          );
+
+          tl.to(
+            cta,
+            { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" },
+            1.65
+          );
+
+          return () => {
+            tl.scrollTrigger?.kill();
+            tl.kill();
+          };
+        }
+      );
+
+      ScrollTrigger.refresh();
+    });
+  </script>
+</body>
+</html>
