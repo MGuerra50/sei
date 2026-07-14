@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Nossos Serviços — Simões Engenharia & Interiores. Planejamento estrutural, design, gerenciamento e consultoria." />
+  <title>Serviços — Simões Engenharia & Interiores</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --svc-bg: #212121;
+      --svc-bg-elevated: #2a2a2a;
+      --svc-text: #f4f2ee;
+      --svc-text-muted: rgba(244, 242, 238, 0.68);
+      --svc-overlay: rgba(12, 14, 18, 0.8);
+      --svc-overlay-hover: rgba(12, 14, 18, 0.28);
+      --svc-accent: #c4a574;
+      --svc-line: rgba(244, 242, 238, 0.18);
+      --svc-radius: clamp(0.9rem, 1.2vw, 1.15rem);
+      --svc-gutter: clamp(1.25rem, 4vw, 4rem);
+      --svc-max: 92rem;
+      --svc-ease: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      font-family: "Outfit", sans-serif;
+      background: #0a0c0f;
+      color: var(--svc-text);
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .servicos {
+      position: relative;
+      width: 100%;
+      padding: clamp(4.5rem, 10vh, 7.5rem) var(--svc-gutter);
+      background: var(--svc-bg);
+      color: var(--svc-text);
+    }
+
+    .servicos__inner {
+      width: min(100%, var(--svc-max));
+      margin-inline: auto;
+    }
+
+    .servicos__header {
+      margin-bottom: clamp(2.5rem, 6vh, 4.5rem);
+      max-width: 28rem;
+    }
+
+    .servicos__title {
+      overflow: hidden;
+    }
+
+    .servicos__title-inner {
+      display: block;
+      font-family: "Syne", sans-serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      will-change: transform, opacity;
+    }
+
+    .servicos__lead {
+      margin-top: 1rem;
+      font-size: clamp(0.95rem, 1.4vw, 1.1rem);
+      font-weight: 300;
+      color: var(--svc-text-muted);
+      max-width: 34ch;
+      line-height: 1.55;
+      will-change: transform, opacity;
+    }
+
+    /* ——— Cards grid ——— */
+    .servicos__grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: clamp(0.75rem, 1.4vw, 1.15rem);
+    }
+
+    .svc-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      min-height: clamp(22rem, 42vh, 28rem);
+      border-radius: var(--svc-radius);
+      overflow: hidden;
+      isolation: isolate;
+      border: 1px solid var(--svc-line);
+      background: var(--svc-bg-elevated);
+      cursor: default;
+      transition: border-color 0.4s var(--svc-ease);
+    }
+
+    .svc-card:focus-within,
+    .svc-card.is-open {
+      border-color: rgba(244, 242, 238, 0.35);
+    }
+
+    .svc-card__media {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+      background:
+        linear-gradient(145deg, #2a2e34 0%, #1a1d22 50%, #3d3428 100%);
+    }
+
+    .svc-card__media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      transform: scale(1);
+      transition: transform 0.85s var(--svc-ease);
+    }
+
+    .svc-card__overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: var(--svc-overlay);
+      transition: background 0.55s var(--svc-ease);
+    }
+
+    .svc-card__content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+      padding: clamp(1.25rem, 2vw, 1.75rem);
+      min-height: 100%;
+      justify-content: flex-end;
+    }
+
+    .svc-card__eyebrow {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(244, 242, 238, 0.55);
+    }
+
+    .svc-card__title {
+      font-family: "Syne", sans-serif;
+      font-size: clamp(1.15rem, 1.6vw, 1.45rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      text-transform: uppercase;
+    }
+
+    .svc-card__subtitle {
+      font-size: clamp(0.88rem, 1.1vw, 0.98rem);
+      font-weight: 300;
+      color: var(--svc-text-muted);
+      line-height: 1.4;
+      max-width: 28ch;
+    }
+
+    .svc-card__details {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1.1rem;
+      margin-top: 0.85rem;
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transform: translateY(12px);
+      transition:
+        opacity 0.45s var(--svc-ease),
+        transform 0.45s var(--svc-ease),
+        max-height 0.55s var(--svc-ease);
+    }
+
+    .svc-card__desc {
+      font-size: clamp(0.82rem, 1vw, 0.92rem);
+      font-weight: 300;
+      color: rgba(244, 242, 238, 0.82);
+      line-height: 1.5;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .svc-card__cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      padding: 0.65rem 1.05rem;
+      border: 1px solid rgba(244, 242, 238, 0.35);
+      border-radius: 999px;
+      color: var(--svc-text);
+      background: transparent;
+      transition:
+        background 0.3s var(--svc-ease),
+        border-color 0.3s var(--svc-ease),
+        transform 0.3s var(--svc-ease);
+    }
+
+    .svc-card__cta:hover,
+    .svc-card__cta:focus-visible {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(244, 242, 238, 0.65);
+      outline: none;
+      transform: translateY(-1px);
+    }
+
+    .svc-card__cta svg {
+      width: 0.95rem;
+      height: 0.95rem;
+      flex-shrink: 0;
+    }
+
+    .svc-card:hover .svc-card__media img,
+    .svc-card:focus-within .svc-card__media img,
+    .svc-card.is-open .svc-card__media img {
+      transform: scale(1.06);
+    }
+
+    .svc-card:hover .svc-card__overlay,
+    .svc-card:focus-within .svc-card__overlay,
+    .svc-card.is-open .svc-card__overlay {
+      background: var(--svc-overlay-hover);
+    }
+
+    .svc-card:hover .svc-card__details,
+    .svc-card:focus-within .svc-card__details,
+    .svc-card.is-open .svc-card__details {
+      max-height: 12rem;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ——— Portfolio preview ——— */
+    .servicos__proof {
+      margin-top: clamp(3rem, 7vh, 5rem);
+      padding-top: clamp(2rem, 4vh, 3rem);
+      border-top: 1px solid rgba(244, 242, 238, 0.1);
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 1.5rem 2rem;
+      align-items: end;
+    }
+
+    .servicos__proof-copy h3 {
+      font-family: "Syne", sans-serif;
+      font-size: clamp(1.1rem, 2vw, 1.45rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.4rem;
+    }
+
+    .servicos__proof-copy p {
+      font-size: 0.92rem;
+      font-weight: 300;
+      color: var(--svc-text-muted);
+      max-width: 36ch;
+    }
+
+    .servicos__proof-link {
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      border-bottom: 1px solid rgba(244, 242, 238, 0.35);
+      padding-bottom: 0.15rem;
+      transition: border-color 0.25s, color 0.25s;
+      white-space: nowrap;
+    }
+
+    .servicos__proof-link:hover,
+    .servicos__proof-link:focus-visible {
+      border-color: var(--svc-text);
+      color: #fff;
+      outline: none;
+    }
+
+    .servicos__thumbs {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(0.65rem, 1.2vw, 1rem);
+      margin-top: 0.25rem;
+    }
+
+    .servicos__thumb {
+      position: relative;
+      display: block;
+      aspect-ratio: 4 / 3;
+      border-radius: calc(var(--svc-radius) - 0.15rem);
+      overflow: hidden;
+      border: 1px solid var(--svc-line);
+      background:
+        linear-gradient(145deg, #2a2e34 0%, #1a1d22 55%, #3d3428 100%);
+    }
+
+    .servicos__thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s var(--svc-ease);
+    }
+
+    .servicos__thumb:hover img,
+    .servicos__thumb:focus-visible img {
+      transform: scale(1.05);
+    }
+
+    .servicos__thumb:focus-visible {
+      outline: 2px solid var(--svc-accent);
+      outline-offset: 3px;
+    }
+
+    .servicos__thumb span {
+      position: absolute;
+      left: 0.85rem;
+      bottom: 0.75rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-shadow: 0 1px 8px rgba(0, 0, 0, 0.65);
+    }
+
+    /* Reveal initial state (GSAP) */
+    .servicos:not(.is-static) .servicos__title-inner,
+    .servicos:not(.is-static) .servicos__lead,
+    .servicos:not(.is-static) .svc-card {
+      opacity: 0;
+      transform: translateY(28px);
+    }
+
+    /* ——— Responsive ——— */
+    @media (max-width: 1099px) {
+      .servicos__grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .svc-card {
+        min-height: clamp(20rem, 36vh, 24rem);
+      }
+    }
+
+    @media (max-width: 639px) {
+      .servicos__grid {
+        grid-template-columns: 1fr;
+      }
+
+      .servicos__proof {
+        grid-template-columns: 1fr;
+        align-items: start;
+      }
+
+      .servicos__thumbs {
+        grid-template-columns: 1fr;
+      }
+
+      /* Touch: details via .is-open; CTA always reachable when open */
+      .svc-card__details {
+        /* keep collapsed until open */
+      }
+    }
+
+    @media (min-width: 1600px) {
+      :root {
+        --svc-max: 110rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .servicos__title-inner,
+      .servicos__lead,
+      .svc-card,
+      .svc-card__media img,
+      .svc-card__overlay,
+      .svc-card__details,
+      .servicos__thumb img {
+        transition: none !important;
+        transform: none !important;
+        opacity: 1 !important;
+      }
+
+      .svc-card__details {
+        max-height: none;
+        opacity: 1;
+        overflow: visible;
+      }
+    }
+  </style>
+</head>
+<body>
+  <section class="servicos" id="servicos" aria-label="Nossos Serviços">
+    <div class="servicos__inner">
+      <header class="servicos__header">
+        <h1 class="servicos__title">
+          <span class="servicos__title-inner">Nossos Serviços</span>
+        </h1>
+        <p class="servicos__lead">
+          Engenharia e interiores com linguagem clara, execução precisa e conversão direta para o próximo passo.
+        </p>
+      </header>
+
+      <div class="servicos__grid">
+        <article class="svc-card" tabindex="0">
+          <div class="svc-card__media" aria-hidden="true">
+            <img
+              src="assets/servico-1.webp"
+              alt=""
+              width="800"
+              height="1000"
+              loading="lazy"
+              decoding="async"
+              onerror="this.style.display='none'"
+            />
+          </div>
+          <div class="svc-card__overlay" aria-hidden="true"></div>
+          <div class="svc-card__content">
+            <span class="svc-card__eyebrow">Estrutura</span>
+            <h2 class="svc-card__title">Planejamento estrutural</h2>
+            <p class="svc-card__subtitle">Base técnica para decisões sem retrabalho.</p>
+            <div class="svc-card__details">
+              <p class="svc-card__desc">
+                Cálculo, fundações e compatibilização alinhados à arquitetura — segurança e previsibilidade desde o primeiro estudo.
+              </p>
+              <a
+                class="svc-card__cta"
+                href="https://wa.me/551134567890?text=Ol%C3%A1%2C%20vi%20o%20servi%C3%A7o%20de%20'Planejamento%20estrutural'%20no%20site%20e%20gostaria%20de%20um%20or%C3%A7amento."
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Solicitar orçamento
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M17.47 14.38c-.27-.14-1.6-.79-1.85-.88-.25-.09-.43-.14-.61.14-.18.27-.7.88-.86 1.06-.16.18-.32.2-.59.07-.27-.14-1.14-.42-2.17-1.34-.8-.71-1.34-1.59-1.5-1.86-.16-.27-.02-.42.12-.55.12-.12.27-.32.41-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.14-.61-1.47-.84-2.01-.22-.53-.45-.46-.61-.46h-.52c-.18 0-.48.07-.73.34-.25.27-.96.94-.96 2.29s.98 2.65 1.12 2.83c.14.18 1.93 2.95 4.68 4.13.65.28 1.16.45 1.56.58.65.21 1.25.18 1.72.11.52-.08 1.6-.65 1.83-1.28.23-.63.23-1.17.16-1.28-.07-.11-.25-.18-.52-.32z" />
+                  <path d="M12.04 2C6.58 2 2.15 6.41 2.15 11.85c0 1.75.46 3.45 1.34 4.95L2 22l5.35-1.4a9.9 9.9 0 0 0 4.69 1.19h.01c5.46 0 9.89-4.41 9.89-9.85C21.94 6.41 17.5 2 12.04 2zm0 17.96h-.01a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.17.83.85-3.09-.2-.32a8.16 8.16 0 0 1-1.25-4.35c0-4.52 3.7-8.2 8.26-8.2 4.55 0 8.26 3.68 8.26 8.2 0 4.52-3.71 8.26-8.26 8.26z" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <article class="svc-card" tabindex="0">
+          <div class="svc-card__media" aria-hidden="true">
+            <img
+              src="assets/servico-2.webp"
+              alt=""
+              width="800"
+              height="1000"
+              loading="lazy"
+              decoding="async"
+              onerror="this.style.display='none'"
+            />
+          </div>
+          <div class="svc-card__overlay" aria-hidden="true"></div>
+          <div class="svc-card__content">
+            <span class="svc-card__eyebrow">Interiores</span>
+            <h2 class="svc-card__title">Design de interiores</h2>
+            <p class="svc-card__subtitle">Ambientes que expressam a identidade do negócio.</p>
+            <div class="svc-card__details">
+              <p class="svc-card__desc">
+                Materialidade, luz e proporção pensadas para o uso diário — espaços sofisticados sem abrir mão da função.
+              </p>
+              <a
+                class="svc-card__cta"
+                href="https://wa.me/551134567890?text=Ol%C3%A1%2C%20vi%20o%20servi%C3%A7o%20de%20'Design%20de%20interiores'%20no%20site%20e%20gostaria%20de%20um%20or%C3%A7amento."
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Solicitar orçamento
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M17.47 14.38c-.27-.14-1.6-.79-1.85-.88-.25-.09-.43-.14-.61.14-.18.27-.7.88-.86 1.06-.16.18-.32.2-.59.07-.27-.14-1.14-.42-2.17-1.34-.8-.71-1.34-1.59-1.5-1.86-.16-.27-.02-.42.12-.55.12-.12.27-.32.41-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.14-.61-1.47-.84-2.01-.22-.53-.45-.46-.61-.46h-.52c-.18 0-.48.07-.73.34-.25.27-.96.94-.96 2.29s.98 2.65 1.12 2.83c.14.18 1.93 2.95 4.68 4.13.65.28 1.16.45 1.56.58.65.21 1.25.18 1.72.11.52-.08 1.6-.65 1.83-1.28.23-.63.23-1.17.16-1.28-.07-.11-.25-.18-.52-.32z" />
+                  <path d="M12.04 2C6.58 2 2.15 6.41 2.15 11.85c0 1.75.46 3.45 1.34 4.95L2 22l5.35-1.4a9.9 9.9 0 0 0 4.69 1.19h.01c5.46 0 9.89-4.41 9.89-9.85C21.94 6.41 17.5 2 12.04 2zm0 17.96h-.01a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.17.83.85-3.09-.2-.32a8.16 8.16 0 0 1-1.25-4.35c0-4.52 3.7-8.2 8.26-8.2 4.55 0 8.26 3.68 8.26 8.2 0 4.52-3.71 8.26-8.26 8.26z" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <article class="svc-card" tabindex="0">
+          <div class="svc-card__media" aria-hidden="true">
+            <img
+              src="assets/servico-3.webp"
+              alt=""
+              width="800"
+              height="1000"
+              loading="lazy"
+              decoding="async"
+              onerror="this.style.display='none'"
+            />
+          </div>
+          <div class="svc-card__overlay" aria-hidden="true"></div>
+          <div class="svc-card__content">
+            <span class="svc-card__eyebrow">Obra</span>
+            <h2 class="svc-card__title">Gerenciamento de obras</h2>
+            <p class="svc-card__subtitle">Prazo, custo e qualidade sob um único comando.</p>
+            <div class="svc-card__details">
+              <p class="svc-card__desc">
+                Cronograma, fornecedores e controle de qualidade acompanhados do projeto à entrega — menos ruído, mais previsibilidade.
+              </p>
+              <a
+                class="svc-card__cta"
+                href="https://wa.me/551134567890?text=Ol%C3%A1%2C%20vi%20o%20servi%C3%A7o%20de%20'Gerenciamento%20de%20obras'%20no%20site%20e%20gostaria%20de%20um%20or%C3%A7amento."
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Solicitar orçamento
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M17.47 14.38c-.27-.14-1.6-.79-1.85-.88-.25-.09-.43-.14-.61.14-.18.27-.7.88-.86 1.06-.16.18-.32.2-.59.07-.27-.14-1.14-.42-2.17-1.34-.8-.71-1.34-1.59-1.5-1.86-.16-.27-.02-.42.12-.55.12-.12.27-.32.41-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.14-.61-1.47-.84-2.01-.22-.53-.45-.46-.61-.46h-.52c-.18 0-.48.07-.73.34-.25.27-.96.94-.96 2.29s.98 2.65 1.12 2.83c.14.18 1.93 2.95 4.68 4.13.65.28 1.16.45 1.56.58.65.21 1.25.18 1.72.11.52-.08 1.6-.65 1.83-1.28.23-.63.23-1.17.16-1.28-.07-.11-.25-.18-.52-.32z" />
+                  <path d="M12.04 2C6.58 2 2.15 6.41 2.15 11.85c0 1.75.46 3.45 1.34 4.95L2 22l5.35-1.4a9.9 9.9 0 0 0 4.69 1.19h.01c5.46 0 9.89-4.41 9.89-9.85C21.94 6.41 17.5 2 12.04 2zm0 17.96h-.01a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.17.83.85-3.09-.2-.32a8.16 8.16 0 0 1-1.25-4.35c0-4.52 3.7-8.2 8.26-8.2 4.55 0 8.26 3.68 8.26 8.2 0 4.52-3.71 8.26-8.26 8.26z" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <article class="svc-card" tabindex="0">
+          <div class="svc-card__media" aria-hidden="true">
+            <img
+              src="assets/servico-4.webp"
+              alt=""
+              width="800"
+              height="1000"
+              loading="lazy"
+              decoding="async"
+              onerror="this.style.display='none'"
+            />
+          </div>
+          <div class="svc-card__overlay" aria-hidden="true"></div>
+          <div class="svc-card__content">
+            <span class="svc-card__eyebrow">Consultoria</span>
+            <h2 class="svc-card__title">Consultoria técnica</h2>
+            <p class="svc-card__subtitle">Clareza para decisões de alto impacto.</p>
+            <div class="svc-card__details">
+              <p class="svc-card__desc">
+                Diagnóstico, análise de risco e orientação especializada para projetos complexos — da viabilidade à execução.
+              </p>
+              <a
+                class="svc-card__cta"
+                href="https://wa.me/551134567890?text=Ol%C3%A1%2C%20vi%20o%20servi%C3%A7o%20de%20'Consultoria%20t%C3%A9cnica'%20no%20site%20e%20gostaria%20de%20um%20or%C3%A7amento."
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Solicitar orçamento
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M17.47 14.38c-.27-.14-1.6-.79-1.85-.88-.25-.09-.43-.14-.61.14-.18.27-.7.88-.86 1.06-.16.18-.32.2-.59.07-.27-.14-1.14-.42-2.17-1.34-.8-.71-1.34-1.59-1.5-1.86-.16-.27-.02-.42.12-.55.12-.12.27-.32.41-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.14-.61-1.47-.84-2.01-.22-.53-.45-.46-.61-.46h-.52c-.18 0-.48.07-.73.34-.25.27-.96.94-.96 2.29s.98 2.65 1.12 2.83c.14.18 1.93 2.95 4.68 4.13.65.28 1.16.45 1.56.58.65.21 1.25.18 1.72.11.52-.08 1.6-.65 1.83-1.28.23-.63.23-1.17.16-1.28-.07-.11-.25-.18-.52-.32z" />
+                  <path d="M12.04 2C6.58 2 2.15 6.41 2.15 11.85c0 1.75.46 3.45 1.34 4.95L2 22l5.35-1.4a9.9 9.9 0 0 0 4.69 1.19h.01c5.46 0 9.89-4.41 9.89-9.85C21.94 6.41 17.5 2 12.04 2zm0 17.96h-.01a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.17.83.85-3.09-.2-.32a8.16 8.16 0 0 1-1.25-4.35c0-4.52 3.7-8.2 8.26-8.2 4.55 0 8.26 3.68 8.26 8.2 0 4.52-3.71 8.26-8.26 8.26z" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <aside class="servicos__proof" aria-label="Projetos relacionados">
+        <div class="servicos__proof-copy">
+          <h3>Projetos que comprovam o método</h3>
+          <p>Uma amostra do portfólio ligada aos serviços acima — veja o detalhe completo na galeria.</p>
+        </div>
+        <a class="servicos__proof-link" href="#portfolio">Ver portfólio completo</a>
+
+        <div class="servicos__thumbs">
+          <a class="servicos__thumb" href="#portfolio" aria-label="Ver projeto residencial no portfólio">
+            <img
+              src="assets/portfolio-1.webp"
+              alt=""
+              width="640"
+              height="480"
+              loading="lazy"
+              decoding="async"
+              onerror="this.style.display='none'"
+            />
+            <span>Residencial</span>
+          </a>
+          <a class="servicos__thumb" href="#portfolio" aria-label="Ver projeto corporativo no portfólio">
+            <img
+              src="assets/portfolio-2.webp"
+              alt=""
+              width="640"
+              height="480"
+              loading="lazy"
+              decoding="async"
+              onerror="this.style.display='none'"
+            />
+            <span>Corporativo</span>
+          </a>
+          <a class="servicos__thumb" href="#portfolio" aria-label="Ver projeto de interiores no portfólio">
+            <img
+              src="assets/portfolio-3.webp"
+              alt=""
+              width="640"
+              height="480"
+              loading="lazy"
+              decoding="async"
+              onerror="this.style.display='none'"
+            />
+            <span>Interiores</span>
+          </a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const section = document.querySelector(".servicos");
+      const cards = Array.from(document.querySelectorAll(".svc-card"));
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const isCoarse = window.matchMedia("(hover: none), (pointer: coarse)").matches;
+
+      if (!section) return;
+
+      if (reduceMotion || typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") {
+        section.classList.add("is-static");
+      } else {
+        gsap.registerPlugin(ScrollTrigger);
+
+        const title = section.querySelector(".servicos__title-inner");
+        const lead = section.querySelector(".servicos__lead");
+
+        gsap.set([title, lead], { opacity: 0, y: 28 });
+        gsap.set(cards, { opacity: 0, y: 32 });
+
+        const tl = gsap.timeline({
+          defaults: { ease: "power3.out" },
+          scrollTrigger: {
+            trigger: section,
+            start: "top 75%",
+            once: true,
+          },
+        });
+
+        tl.to(title, { opacity: 1, y: 0, duration: 0.9 })
+          .to(lead, { opacity: 1, y: 0, duration: 0.7 }, "-=0.55")
+          .to(
+            cards,
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.75,
+              stagger: 0.1,
+            },
+            "-=0.35"
+          );
+      }
+
+      // Touch: first tap opens card; CTA works on second interaction
+      if (isCoarse) {
+        cards.forEach((card) => {
+          card.addEventListener("click", (event) => {
+            if (event.target.closest(".svc-card__cta")) return;
+
+            const alreadyOpen = card.classList.contains("is-open");
+            cards.forEach((other) => other.classList.remove("is-open"));
+            if (!alreadyOpen) card.classList.add("is-open");
+          });
+        });
+
+        document.addEventListener("click", (event) => {
+          if (!event.target.closest(".svc-card")) {
+            cards.forEach((card) => card.classList.remove("is-open"));
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>
