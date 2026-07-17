@@ -1301,13 +1301,13 @@
     }
 
     .sobre__title-card {
-      grid-column: 1 / -1;
+      grid-column: 2;
       grid-row: 1;
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
       width: 100%;
-      padding: clamp(0.85rem, 1.4vw, 1.15rem) clamp(1.25rem, 2vw, 1.75rem);
+      padding: clamp(0.85rem, 1.4vw, 1.15rem) 0;
       border-radius: 0;
       background: transparent;
       opacity: 0;
@@ -1323,7 +1323,7 @@
       letter-spacing: -0.03em;
       line-height: 1.15;
       color: #141414;
-      text-align: center;
+      text-align: left;
     }
 
     .sobre__spacer {
@@ -1337,7 +1337,7 @@
       grid-row: 2;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      grid-template-rows: 1fr 1fr;
+      grid-template-rows: minmax(0, 1fr) minmax(0, 1fr);
       gap: clamp(0.75rem, 1.2vw, 1rem);
       min-height: 0;
       align-self: stretch;
@@ -1349,6 +1349,7 @@
       flex-direction: column;
       align-items: flex-start;
       gap: 0;
+      min-height: 0;
       padding: clamp(1.15rem, 1.6vw, 1.65rem);
       border: 1px solid rgba(244, 242, 238, 0.16);
       border-radius: clamp(0.9rem, 1.2vw, 1.15rem);
@@ -1362,6 +1363,7 @@
       transform: translateY(28px);
       will-change: opacity, transform;
       transition: border-color 0.3s var(--ease-out), background 0.3s var(--ease-out), transform 0.3s var(--ease-out);
+      overflow: hidden;
     }
 
     .sobre__card:hover {
@@ -1401,16 +1403,40 @@
       margin-bottom: 0.45rem;
       line-height: 1.25;
       color: #f4f2ee;
+      flex-shrink: 0;
     }
 
     .sobre__card p {
-      flex: 1;
+      flex: 1 1 auto;
+      min-height: 0;
       font-size: clamp(0.75rem, 0.95vw, 0.88rem);
       font-weight: 300;
       color: rgba(244, 242, 238, 0.68);
       line-height: 1.5;
       max-width: none;
       margin-bottom: 0.85rem;
+      padding-right: 0.35rem;
+      overflow-x: hidden;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(244, 242, 238, 0.4) transparent;
+    }
+
+    .sobre__card p::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    .sobre__card p::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .sobre__card p::-webkit-scrollbar-thumb {
+      background: rgba(244, 242, 238, 0.35);
+      border-radius: 999px;
+    }
+
+    .sobre__card p::-webkit-scrollbar-thumb:hover {
+      background: rgba(244, 242, 238, 0.55);
     }
 
     .sobre__card-more {
@@ -1438,11 +1464,11 @@
     }
 
     .sobre__cta {
-      grid-column: 1 / -1;
+      grid-column: 1;
       grid-row: 3;
       display: flex;
-      align-items: center;
-      padding-top: 0.25rem;
+      align-items: flex-start;
+      padding-top: clamp(1.25rem, 3vh, 2.25rem);
       opacity: 0;
       transform: translateY(24px);
       will-change: opacity, transform;
@@ -1492,7 +1518,7 @@
     }
 
     .sobre.is-static .sobre__title-card {
-      grid-column: 1 / -1;
+      grid-column: 2;
       grid-row: 1;
       opacity: 1;
       transform: none;
@@ -1515,7 +1541,7 @@
     }
 
     .sobre.is-static .sobre__cta {
-      grid-column: 1 / -1;
+      grid-column: 1;
       grid-row: 3;
       opacity: 1;
       transform: none;
@@ -1523,31 +1549,81 @@
 
     /* ——— Responsive ——— */
     @media (max-width: 999px) {
+      /* Em tablet/mobile o pin 100dvh corta o 3º card — layout em fluxo */
       .sobre {
-        height: 170vh;
+        height: auto;
+      }
+
+      .sobre__stage {
+        position: relative;
+        height: auto;
+        min-height: 0;
+        overflow: visible;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto auto;
+        gap: clamp(0.75rem, 1.4vw, 1.15rem);
+        padding: clamp(1.5rem, 4vh, 3rem) var(--gutter);
+        width: min(100%, var(--max));
+        margin-inline: auto;
+      }
+
+      .sobre__media {
+        position: relative !important;
+        inset: auto !important;
+        top: auto !important;
+        left: auto !important;
+        right: auto !important;
+        bottom: auto !important;
+        grid-column: 1;
+        grid-row: 2;
+        width: 100%;
+        height: min(42vh, 22rem);
+        min-height: min(42vh, 22rem);
+        border-radius: var(--radius-img) !important;
       }
 
       .sobre__panel {
-        grid-template-columns: 1fr;
-        grid-template-rows: auto auto auto;
-        align-content: start;
-        padding-bottom: clamp(1.25rem, 3vh, 2rem);
+        position: contents;
       }
 
       .sobre__spacer {
         display: none;
       }
 
+      .sobre__title-card {
+        grid-column: 1;
+        grid-row: 1;
+        opacity: 1;
+        transform: none;
+        justify-content: center;
+      }
+
+      .sobre__title-card h2 {
+        text-align: center;
+      }
+
       .sobre__cards {
         grid-column: 1;
-        grid-row: 2;
+        grid-row: 3;
         grid-template-columns: 1fr 1fr;
         grid-template-rows: auto auto;
+        align-self: stretch;
+      }
+
+      .sobre__card {
+        opacity: 1;
+        transform: none;
+        overflow: visible;
       }
 
       .sobre__cta {
         grid-column: 1;
-        grid-row: 3;
+        grid-row: 4;
+        opacity: 1;
+        transform: none;
+        padding-top: clamp(0.5rem, 1.5vh, 1rem);
+        margin-top: 0;
       }
 
       .sobre.is-static .sobre__stage {
@@ -1578,10 +1654,6 @@
     }
 
     @media (max-width: 639px) {
-      .sobre {
-        height: 160vh;
-      }
-
       .sobre__cards {
         grid-template-columns: 1fr;
       }
@@ -1590,9 +1662,28 @@
         grid-column: 1;
       }
 
+      .sobre__media,
       .sobre.is-static .sobre__media {
         min-height: min(36vh, 16rem);
         height: min(36vh, 16rem);
+      }
+    }
+
+    @media (max-height: 820px) and (min-width: 1000px) {
+      .sobre__card {
+        padding: 1rem 1.15rem;
+      }
+
+      .sobre__card-icon {
+        margin-bottom: 0.55rem;
+      }
+
+      .sobre__cta {
+        padding-top: clamp(0.85rem, 2vh, 1.35rem);
+      }
+
+      .sobre__cta-text {
+        font-size: clamp(1rem, 1.8vw, 1.35rem);
       }
     }
 
@@ -1702,17 +1793,16 @@
       inset: 0;
       z-index: 0;
       overflow: hidden;
-      background:
-        linear-gradient(145deg, #2a2e34 0%, #1a1d22 50%, #3d3428 100%);
+      background-color: #1a1d22;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      transform: scale(1);
+      transition: transform 0.85s var(--svc-ease);
     }
 
     .svc-card__media img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
-      transform: scale(1);
-      transition: transform 0.85s var(--svc-ease);
+      display: none;
     }
 
     .svc-card__overlay {
@@ -2924,7 +3014,29 @@
           isMobile: "(max-width: 639px)",
         },
         (context) => {
-          const { isDesktop, isTablet } = context.conditions;
+          const { isDesktop } = context.conditions;
+
+          // Tablet/mobile: layout em fluxo (CSS). Só fade-up leve — sem morph sticky.
+          if (!isDesktop) {
+            gsap.set([titleCard, ...cards, cta], { opacity: 0, y: 24 });
+            const fade = gsap.timeline({
+              defaults: { ease: "power2.out" },
+              scrollTrigger: {
+                trigger: section,
+                start: "top 70%",
+                once: true,
+              },
+            });
+            fade
+              .to(titleCard, { opacity: 1, y: 0, duration: 0.55 })
+              .to(cards, { opacity: 1, y: 0, duration: 0.55, stagger: 0.08 }, "-=0.3")
+              .to(cta, { opacity: 1, y: 0, duration: 0.5 }, "-=0.25");
+
+            return () => {
+              fade.scrollTrigger?.kill();
+              fade.kill();
+            };
+          }
 
           gsap.set(titleCard, { opacity: 0, y: 20 });
           gsap.set(cards, { opacity: 0, y: 28 });
@@ -2937,29 +3049,15 @@
             borderRadius: "0px",
           });
 
-          const endState = isDesktop
-            ? {
-                top: "16%",
-                left: "3.5%",
-                right: "52%",
-                bottom: "18%",
-                borderRadius: "32px",
-              }
-            : isTablet
-              ? {
-                  top: "14%",
-                  left: "4%",
-                  right: "4%",
-                  bottom: "50%",
-                  borderRadius: "24px",
-                }
-              : {
-                  top: "12%",
-                  left: "4%",
-                  right: "4%",
-                  bottom: "56%",
-                  borderRadius: "20px",
-                };
+          const shortViewport = window.matchMedia("(max-height: 820px)").matches;
+
+          const endState = {
+            top: shortViewport ? "12%" : "14%",
+            left: "3.5%",
+            right: "52%",
+            bottom: shortViewport ? "14%" : "22%",
+            borderRadius: "32px",
+          };
 
           const tl = gsap.timeline({
             defaults: { ease: "none" },
