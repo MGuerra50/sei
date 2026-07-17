@@ -1708,10 +1708,11 @@
       --svc-bg-elevated: #2a2a2a;
       --svc-text: #f4f2ee;
       --svc-text-muted: rgba(244, 242, 238, 0.68);
-      --svc-overlay: rgba(12, 14, 18, 0.8);
-      --svc-overlay-hover: rgba(12, 14, 18, 0.28);
+      --svc-overlay: rgba(255, 255, 255, 0.4);
+      --svc-overlay-hover: rgba(255, 255, 255, 0.6);
       --svc-accent: #c4a574;
       --svc-line: rgba(244, 242, 238, 0.18);
+      --svc-card-text: #353535;
       --svc-radius: clamp(0.9rem, 1.2vw, 1.15rem);
       --svc-gutter: clamp(1.25rem, 4vw, 4rem);
       --svc-max: 92rem;
@@ -1777,15 +1778,16 @@
       border-radius: var(--svc-radius);
       overflow: hidden;
       isolation: isolate;
-      border: 1px solid var(--svc-line);
+      border: 1px solid rgba(53, 53, 53, 0.18);
       background: var(--svc-bg-elevated);
       cursor: default;
+      color: var(--svc-card-text);
       transition: border-color 0.4s var(--svc-ease);
     }
 
     .svc-card:focus-within,
     .svc-card.is-open {
-      border-color: rgba(244, 242, 238, 0.35);
+      border-color: rgba(53, 53, 53, 0.35);
     }
 
     .svc-card__media {
@@ -1826,10 +1828,10 @@
 
     .svc-card__eyebrow {
       font-size: 0.72rem;
-      font-weight: 500;
+      font-weight: 600;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: rgba(244, 242, 238, 0.55);
+      color: rgba(53, 53, 53, 0.85);
     }
 
     .svc-card__title {
@@ -1839,12 +1841,13 @@
       letter-spacing: -0.02em;
       line-height: 1.15;
       text-transform: uppercase;
+      color: var(--svc-card-text);
     }
 
     .svc-card__subtitle {
       font-size: clamp(0.88rem, 1.1vw, 0.98rem);
-      font-weight: 300;
-      color: var(--svc-text-muted);
+      font-weight: 500;
+      color: rgba(53, 53, 53, 0.92);
       line-height: 1.4;
       max-width: 28ch;
     }
@@ -1867,8 +1870,8 @@
 
     .svc-card__desc {
       font-size: clamp(0.82rem, 1vw, 0.92rem);
-      font-weight: 300;
-      color: rgba(244, 242, 238, 0.82);
+      font-weight: 500;
+      color: rgba(53, 53, 53, 0.92);
       line-height: 1.5;
       display: -webkit-box;
       -webkit-line-clamp: 3;
@@ -1881,12 +1884,12 @@
       align-items: center;
       gap: 0.45rem;
       font-size: 0.82rem;
-      font-weight: 500;
+      font-weight: 600;
       letter-spacing: 0.02em;
       padding: 0.65rem 1.05rem;
-      border: 1px solid rgba(244, 242, 238, 0.35);
+      border: 1px solid rgba(53, 53, 53, 0.45);
       border-radius: 999px;
-      color: var(--svc-text);
+      color: var(--svc-card-text);
       background: transparent;
       transition:
         background 0.3s var(--svc-ease),
@@ -1896,8 +1899,8 @@
 
     .svc-card__cta:hover,
     .svc-card__cta:focus-visible {
-      background: rgba(255, 255, 255, 0.08);
-      border-color: rgba(244, 242, 238, 0.65);
+      background: rgba(53, 53, 53, 0.08);
+      border-color: rgba(53, 53, 53, 0.6);
       outline: none;
       transform: translateY(-1px);
     }
@@ -1908,9 +1911,9 @@
       flex-shrink: 0;
     }
 
-    .svc-card:hover .svc-card__media img,
-    .svc-card:focus-within .svc-card__media img,
-    .svc-card.is-open .svc-card__media img {
+    .svc-card:hover .svc-card__media,
+    .svc-card:focus-within .svc-card__media,
+    .svc-card.is-open .svc-card__media {
       transform: scale(1.06);
     }
 
@@ -2058,7 +2061,7 @@
       .servicos__title-inner,
       .servicos__lead,
       .svc-card,
-      .svc-card__media img,
+      .svc-card__media,
       .svc-card__overlay,
       .svc-card__details,
       .servicos__thumb img {
@@ -2282,7 +2285,7 @@
       gap: clamp(1rem, 2vw, 1.5rem);
     }
 
-    .yt-facade {
+    .video-shot {
       position: relative;
       display: block;
       width: 100%;
@@ -2291,13 +2294,10 @@
       overflow: hidden;
       border: 1px solid rgba(244, 242, 238, 0.14);
       background: #0a0c0f;
-      cursor: pointer;
-      padding: 0;
-      color: inherit;
-      text-align: left;
+      margin: 0;
     }
 
-    .yt-facade__poster {
+    .video-shot__img {
       position: absolute;
       inset: 0;
       width: 100%;
@@ -2306,73 +2306,34 @@
       transition: transform 0.8s var(--vd-ease);
     }
 
-    .yt-facade:hover .yt-facade__poster {
+    .video-shot:hover .video-shot__img {
       transform: scale(1.04);
     }
 
-    .yt-facade__shade {
+    .video-shot__shade {
       position: absolute;
       inset: 0;
-      background: rgba(10, 12, 15, 0.42);
+      background: linear-gradient(180deg, rgba(10, 12, 15, 0.1) 35%, rgba(10, 12, 15, 0.65) 100%);
       z-index: 1;
+      pointer-events: none;
     }
 
-    .yt-facade__play {
-      position: absolute;
-      z-index: 2;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 4rem;
-      height: 4rem;
-      border-radius: 50%;
-      border: 1px solid rgba(244, 242, 238, 0.45);
-      background: rgba(10, 12, 15, 0.55);
-      backdrop-filter: blur(8px);
-      display: grid;
-      place-items: center;
-      transition: background 0.3s, transform 0.3s;
-    }
-
-    .yt-facade:hover .yt-facade__play {
-      background: rgba(196, 165, 116, 0.35);
-      transform: translate(-50%, -50%) scale(1.05);
-    }
-
-    .yt-facade__play svg {
-      width: 1.25rem;
-      height: 1.25rem;
-      margin-left: 0.15rem;
-      fill: #f4f2ee;
-    }
-
-    .yt-facade__caption {
+    .video-shot__caption {
       position: absolute;
       z-index: 2;
       left: 1rem;
       right: 1rem;
       bottom: 1rem;
+      margin: 0;
       font-family: "Syne", sans-serif;
       font-size: clamp(0.95rem, 1.3vw, 1.1rem);
       font-weight: 700;
       letter-spacing: -0.02em;
-      text-shadow: 0 1px 12px rgba(0,0,0,0.55);
-    }
-
-    .yt-facade.is-playing {
-      cursor: default;
-    }
-
-    .yt-facade iframe {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      border: 0;
+      text-shadow: 0 1px 12px rgba(0, 0, 0, 0.55);
     }
 
     .videos:not(.is-static) .videos__header,
-    .videos:not(.is-static) .yt-facade {
+    .videos:not(.is-static) .video-shot {
       opacity: 0;
       transform: translateY(24px);
     }
@@ -2388,25 +2349,49 @@
       padding: clamp(5rem, 12vh, 8rem) clamp(1.25rem, 4vw, 4rem);
       color: #f4f2ee;
       text-align: center;
-      isolation: isolate;
       overflow: hidden;
       background-color: #1a1c20;
-      background-image: url("assets/cta-bg.webp");
-      background-size: cover;
-      background-position: center;
     }
 
-    .cta-close::before {
-      content: "";
+    .cta-close__media {
       position: absolute;
       inset: 0;
       z-index: 0;
-      background: rgba(10, 12, 15, 0.72);
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .cta-close__bg {
+      position: absolute;
+      left: 0;
+      width: 100%;
+      top: -40%;
+      height: 180%;
+      z-index: 0;
+      will-change: transform;
+      pointer-events: none;
+    }
+
+    .cta-close__bg img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      transform: translateZ(0);
+    }
+
+    .cta-close__overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: rgba(0, 0, 0, 0.3);
+      pointer-events: none;
     }
 
     .cta-close__inner {
       position: relative;
-      z-index: 1;
+      z-index: 2;
       width: min(100%, 42rem);
       margin-inline: auto;
     }
@@ -2578,10 +2563,10 @@
       .pj-card,
       .projetos__cta,
       .videos__header,
-      .yt-facade,
+      .video-shot,
       .cta-close__inner,
       .pj-card__media img,
-      .yt-facade__poster {
+      .video-shot__img {
         transition: none !important;
         transform: none !important;
         opacity: 1 !important;
@@ -2671,17 +2656,11 @@
 
       <div class="servicos__grid">
         <article class="svc-card" tabindex="0">
-          <div class="svc-card__media" aria-hidden="true">
-            <img
-              src="assets/servico-1.webp"
-              alt=""
-              width="800"
-              height="1000"
-              loading="lazy"
-              decoding="async"
-              onerror="this.style.display='none'"
-            />
-          </div>
+          <div
+            class="svc-card__media"
+            aria-hidden="true"
+            style="background-image: url('assets/Planejamento estrutural.png')"
+          ></div>
           <div class="svc-card__overlay" aria-hidden="true"></div>
           <div class="svc-card__content">
             <span class="svc-card__eyebrow">Estrutura</span>
@@ -2708,17 +2687,11 @@
         </article>
 
         <article class="svc-card" tabindex="0">
-          <div class="svc-card__media" aria-hidden="true">
-            <img
-              src="assets/servico-2.webp"
-              alt=""
-              width="800"
-              height="1000"
-              loading="lazy"
-              decoding="async"
-              onerror="this.style.display='none'"
-            />
-          </div>
+          <div
+            class="svc-card__media"
+            aria-hidden="true"
+            style="background-image: url('assets/Design de interiores.png')"
+          ></div>
           <div class="svc-card__overlay" aria-hidden="true"></div>
           <div class="svc-card__content">
             <span class="svc-card__eyebrow">Interiores</span>
@@ -2745,17 +2718,11 @@
         </article>
 
         <article class="svc-card" tabindex="0">
-          <div class="svc-card__media" aria-hidden="true">
-            <img
-              src="assets/servico-3.webp"
-              alt=""
-              width="800"
-              height="1000"
-              loading="lazy"
-              decoding="async"
-              onerror="this.style.display='none'"
-            />
-          </div>
+          <div
+            class="svc-card__media"
+            aria-hidden="true"
+            style="background-image: url('assets/Gerenciamento de obras.png')"
+          ></div>
           <div class="svc-card__overlay" aria-hidden="true"></div>
           <div class="svc-card__content">
             <span class="svc-card__eyebrow">Obra</span>
@@ -2782,17 +2749,11 @@
         </article>
 
         <article class="svc-card" tabindex="0">
-          <div class="svc-card__media" aria-hidden="true">
-            <img
-              src="assets/servico-4.webp"
-              alt=""
-              width="800"
-              height="1000"
-              loading="lazy"
-              decoding="async"
-              onerror="this.style.display='none'"
-            />
-          </div>
+          <div
+            class="svc-card__media"
+            aria-hidden="true"
+            style="background-image: url('assets/Consultoria técnica.png')"
+          ></div>
           <div class="svc-card__overlay" aria-hidden="true"></div>
           <div class="svc-card__content">
             <span class="svc-card__eyebrow">Consultoria</span>
@@ -2834,29 +2795,29 @@
       <div class="projetos__grid">
         <a class="pj-card" href="portfolio.html">
           <div class="pj-card__media" aria-hidden="true">
-            <img src="assets/portfolio-residencial.webp" alt="" width="800" height="1000" loading="lazy" decoding="async" onerror="this.style.display='none'" />
+            <img src="assets/portfolio-residencial.png" alt="" width="800" height="1000" loading="lazy" decoding="async" onerror="this.style.display='none'" />
           </div>
           <div class="pj-card__overlay" aria-hidden="true"></div>
           <div class="pj-card__body">
             <span class="pj-card__tag">Engenharia &amp; Interiores</span>
-            <h3 class="pj-card__title">Residência Alphaville – Gestão técnica e design de interiores integrado.</h3>
+            <h3 class="pj-card__title">Residência Condomínio Fechado – Gestão técnica e design de interiores integrado.</h3>
           </div>
         </a>
 
         <a class="pj-card" href="portfolio.html">
           <div class="pj-card__media" aria-hidden="true">
-            <img src="assets/portfolio-corporativo.webp" alt="" width="800" height="1000" loading="lazy" decoding="async" onerror="this.style.display='none'" />
+            <img src="assets/portfolio-corporativo.png" alt="" width="800" height="1000" loading="lazy" decoding="async" onerror="this.style.display='none'" />
           </div>
           <div class="pj-card__overlay" aria-hidden="true"></div>
           <div class="pj-card__body">
             <span class="pj-card__tag">Engenharia Civil</span>
-            <h3 class="pj-card__title">Escritório Corporativo CMI – Precisão estrutural e otimização de layout.</h3>
+            <h3 class="pj-card__title">Escritório Corporativo – Precisão estrutural e otimização de layout.</h3>
           </div>
         </a>
 
         <a class="pj-card" href="portfolio.html">
           <div class="pj-card__media" aria-hidden="true">
-            <img src="assets/portfolio-interiores.webp" alt="" width="800" height="1000" loading="lazy" decoding="async" onerror="this.style.display='none'" />
+            <img src="assets/portfolio-interiores.png" alt="" width="800" height="1000" loading="lazy" decoding="async" onerror="this.style.display='none'" />
           </div>
           <div class="pj-card__overlay" aria-hidden="true"></div>
           <div class="pj-card__body">
@@ -2879,7 +2840,7 @@
     </div>
   </section>
 
-  <section class="videos" id="videos" aria-label="Vídeos das obras">
+  <section class="videos" id="videos" aria-label="Bastidores das obras">
     <div class="videos__inner">
       <header class="videos__header">
         <h2 class="videos__title">Bastidores da Excelência: Nossas Obras em Movimento</h2>
@@ -2889,38 +2850,44 @@
       </header>
 
       <div class="videos__grid">
-        <button
-          class="yt-facade"
-          type="button"
-          data-youtube-id="PLACEHOLDER_TOUR"
-          aria-label="Reproduzir: Tour Completo – Da Fundações à Decoração Final"
-        >
-          <img class="yt-facade__poster" src="assets/video-poster-tour.webp" alt="" width="1280" height="720" loading="lazy" decoding="async" onerror="this.style.display='none'" />
-          <span class="yt-facade__shade" aria-hidden="true"></span>
-          <span class="yt-facade__play" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
-          </span>
-          <span class="yt-facade__caption">Tour Completo – Da Fundações à Decoração Final</span>
-        </button>
+        <figure class="video-shot">
+          <img
+            class="video-shot__img"
+            src="assets/video1.png"
+            alt="Tour completo — decoração final"
+            width="1280"
+            height="720"
+            loading="lazy"
+            decoding="async"
+          />
+          <span class="video-shot__shade" aria-hidden="true"></span>
+          <figcaption class="video-shot__caption">Tour Completo – Decoração Final</figcaption>
+        </figure>
 
-        <button
-          class="yt-facade"
-          type="button"
-          data-youtube-id="PLACEHOLDER_ENTREGA"
-          aria-label="Reproduzir: Entrega de Chaves &amp; Depoimento do Cliente"
-        >
-          <img class="yt-facade__poster" src="assets/video-poster-entrega.webp" alt="" width="1280" height="720" loading="lazy" decoding="async" onerror="this.style.display='none'" />
-          <span class="yt-facade__shade" aria-hidden="true"></span>
-          <span class="yt-facade__play" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
-          </span>
-          <span class="yt-facade__caption">Entrega de Chaves &amp; Depoimento do Cliente</span>
-        </button>
+        <figure class="video-shot">
+          <img
+            class="video-shot__img"
+            src="assets/video2.png"
+            alt="Entrega de chaves"
+            width="1280"
+            height="720"
+            loading="lazy"
+            decoding="async"
+          />
+          <span class="video-shot__shade" aria-hidden="true"></span>
+          <figcaption class="video-shot__caption">Entrega de Chaves</figcaption>
+        </figure>
       </div>
     </div>
   </section>
 
   <section class="cta-close" id="contato-cta" aria-label="Chamada para ação">
+    <div class="cta-close__media" aria-hidden="true">
+      <div class="cta-close__bg">
+        <img src="assets/paralax.png" alt="" width="1920" height="1080" decoding="async" />
+      </div>
+    </div>
+    <div class="cta-close__overlay" aria-hidden="true"></div>
     <div class="cta-close__inner">
       <h2 class="cta-close__title">Pronto para dar vida ao seu próximo grande projeto?</h2>
       <p class="cta-close__text">
@@ -3198,21 +3165,26 @@
       };
 
       revealSection(".projetos", ".projetos__header, .pj-card, .projetos__cta");
-      revealSection(".videos", ".videos__header, .yt-facade");
+      revealSection(".videos", ".videos__header, .video-shot");
       revealSection(".cta-close", ".cta-close__inner");
 
-      document.querySelectorAll(".yt-facade").forEach((btn) => {
-        btn.addEventListener("click", () => {
-          if (btn.classList.contains("is-playing")) return;
-          const id = btn.dataset.youtubeId;
-          if (!id || id.startsWith("PLACEHOLDER")) {
-            btn.setAttribute("aria-label", (btn.getAttribute("aria-label") || "") + " (vídeo em breve)");
-            return;
-          }
-          btn.classList.add("is-playing");
-          btn.innerHTML = `<iframe src="https://www.youtube.com/embed/${id}?autoplay=1&rel=0" title="YouTube video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>`;
-        });
-      });
+      const ctaClose = document.querySelector(".cta-close");
+      const ctaBg = document.querySelector(".cta-close__bg");
+
+      if (ctaClose && ctaBg && !reduceMotion) {
+        const updateParallax = () => {
+          const rect = ctaClose.getBoundingClientRect();
+          const viewH = window.innerHeight || 1;
+          const progress = (viewH - rect.top) / (viewH + rect.height);
+          const clamped = Math.min(1, Math.max(0, progress));
+          const shift = (clamped - 0.5) * 180;
+          ctaBg.style.transform = `translate3d(0, ${shift}px, 0)`;
+        };
+
+        updateParallax();
+        window.addEventListener("scroll", updateParallax, { passive: true });
+        window.addEventListener("resize", updateParallax);
+      }
     });
   </script>
 
