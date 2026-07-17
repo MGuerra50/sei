@@ -1351,25 +1351,56 @@
       gap: 0;
       min-height: 0;
       padding: clamp(1.15rem, 1.6vw, 1.65rem);
-      border: 1px solid rgba(244, 242, 238, 0.16);
+      border: 1px solid rgba(53, 53, 53, 0.16);
       border-radius: clamp(0.9rem, 1.2vw, 1.15rem);
-      background: rgba(12, 14, 18, 0.28);
-      backdrop-filter: blur(28px) saturate(1.15);
-      -webkit-backdrop-filter: blur(28px) saturate(1.15);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
-      color: #f4f2ee;
+      background-color: #ebe9e4;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: #353535;
       text-align: left;
       opacity: 0;
       transform: translateY(28px);
       will-change: opacity, transform;
-      transition: border-color 0.3s var(--ease-out), background 0.3s var(--ease-out), transform 0.3s var(--ease-out);
+      transition: border-color 0.3s var(--ease-out), transform 0.3s var(--ease-out);
       overflow: hidden;
+      isolation: isolate;
+    }
+
+    .sobre__card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background: rgba(255, 255, 255, 0.3);
+      transition: background 0.35s var(--ease-out);
+      pointer-events: none;
+    }
+
+    .sobre__card > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .sobre__card--1 {
+      background-image: url("assets/card1.png");
+    }
+
+    .sobre__card--2 {
+      background-image: url("assets/card2.png");
+    }
+
+    .sobre__card--3 {
+      background-image: url("assets/card3.png");
     }
 
     .sobre__card:hover {
-      border-color: rgba(244, 242, 238, 0.3);
-      background: rgba(12, 14, 18, 0.38);
+      border-color: rgba(53, 53, 53, 0.3);
       transform: translateY(-2px);
+    }
+
+    .sobre__card:hover::before {
+      background: rgba(255, 255, 255, 0.6);
     }
 
     .sobre__card:nth-child(3) {
@@ -1380,7 +1411,7 @@
       width: clamp(1.25rem, 1.4vw, 1.45rem);
       height: clamp(1.25rem, 1.4vw, 1.45rem);
       margin-bottom: clamp(0.85rem, 1.4vw, 1.25rem);
-      color: #f4f2ee;
+      color: #353535;
       opacity: 0.95;
       flex-shrink: 0;
     }
@@ -1398,11 +1429,11 @@
     .sobre__card h3 {
       font-family: "Syne", sans-serif;
       font-size: clamp(0.95rem, 1.15vw, 1.15rem);
-      font-weight: 600;
+      font-weight: 700;
       letter-spacing: -0.01em;
       margin-bottom: 0.45rem;
       line-height: 1.25;
-      color: #f4f2ee;
+      color: #353535;
       flex-shrink: 0;
     }
 
@@ -1410,8 +1441,8 @@
       flex: 1 1 auto;
       min-height: 0;
       font-size: clamp(0.75rem, 0.95vw, 0.88rem);
-      font-weight: 300;
-      color: rgba(244, 242, 238, 0.68);
+      font-weight: 500;
+      color: #353535;
       line-height: 1.5;
       max-width: none;
       margin-bottom: 0.85rem;
@@ -1419,7 +1450,7 @@
       overflow-x: hidden;
       overflow-y: auto;
       scrollbar-width: thin;
-      scrollbar-color: rgba(244, 242, 238, 0.4) transparent;
+      scrollbar-color: rgba(53, 53, 53, 0.35) transparent;
     }
 
     .sobre__card p::-webkit-scrollbar {
@@ -1431,12 +1462,12 @@
     }
 
     .sobre__card p::-webkit-scrollbar-thumb {
-      background: rgba(244, 242, 238, 0.35);
+      background: rgba(53, 53, 53, 0.3);
       border-radius: 999px;
     }
 
     .sobre__card p::-webkit-scrollbar-thumb:hover {
-      background: rgba(244, 242, 238, 0.55);
+      background: rgba(53, 53, 53, 0.5);
     }
 
     .sobre__card-more {
@@ -1447,15 +1478,15 @@
       width: 1.85rem;
       height: 1.85rem;
       border-radius: 50%;
-      border: 1px solid rgba(244, 242, 238, 0.32);
-      color: #f4f2ee;
+      border: 1px solid rgba(53, 53, 53, 0.35);
+      color: #353535;
       flex-shrink: 0;
       transition: background 0.25s, border-color 0.25s;
     }
 
     .sobre__card:hover .sobre__card-more {
-      background: rgba(255, 255, 255, 0.08);
-      border-color: rgba(244, 242, 238, 0.55);
+      background: rgba(53, 53, 53, 0.08);
+      border-color: rgba(53, 53, 53, 0.55);
     }
 
     .sobre__card-more svg {
@@ -2602,7 +2633,7 @@
         <div class="sobre__spacer" aria-hidden="true"></div>
 
         <div class="sobre__cards">
-          <article class="sobre__card">
+          <article class="sobre__card sobre__card--1">
             <span class="sobre__card-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z" /><circle cx="12" cy="12" r="3" /></svg>
             </span>
@@ -2613,7 +2644,7 @@
             </span>
           </article>
 
-          <article class="sobre__card">
+          <article class="sobre__card sobre__card--2">
             <span class="sobre__card-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z" /></svg>
             </span>
@@ -2624,7 +2655,7 @@
             </span>
           </article>
 
-          <article class="sobre__card">
+          <article class="sobre__card sobre__card--3">
             <span class="sobre__card-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" /><path d="M3 9h18M9 21V9" /></svg>
             </span>
@@ -2828,8 +2859,8 @@
       </div>
 
       <div class="projetos__cta">
-        <a class="btn btn--solid" href="portfolio.html">
-          Ver Portfólio Completo
+        <a class="btn btn--solid" href="https://wa.me/5562999739882?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20uma%20reuni%C3%A3o%20para%20apresentar%20meu%20projeto%20residencial.">
+          Solicitar Estudo de Viabilidade
           <span class="btn__icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M5 12h14M13 5l7 7-7 7" />
@@ -2853,7 +2884,7 @@
         <figure class="video-shot">
           <img
             class="video-shot__img"
-            src="assets/video1.png"
+            src="assets/video2.png"
             alt="Tour completo — decoração final"
             width="1280"
             height="720"
@@ -2861,13 +2892,13 @@
             decoding="async"
           />
           <span class="video-shot__shade" aria-hidden="true"></span>
-          <figcaption class="video-shot__caption">Tour Completo – Decoração Final</figcaption>
+          <figcaption class="video-shot__caption">Tour Na Decoração Final</figcaption>
         </figure>
 
         <figure class="video-shot">
           <img
             class="video-shot__img"
-            src="assets/video2.png"
+            src="assets/video1.png"
             alt="Entrega de chaves"
             width="1280"
             height="720"
@@ -2928,14 +2959,11 @@
       <div class="site-footer__col">
         <h3>Redes</h3>
         <div class="site-footer__social">
-          <a href="#" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.instagram.com/simoes_engenharia_interiores" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm5 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm6.5-.9a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2zM12 9a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/></svg>
           </a>
-          <a href="#" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 9h3V6h-3c-1.7 0-3 1.3-3 3v2H8v3h3v7h3v-7h3l1-3h-4V9c0-.6.4-1 1-1z"/></svg>
-          </a>
-          <a href="#" aria-label="YouTube" target="_blank" rel="noopener noreferrer">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23 12.2s0-3.1-.4-4.5c-.2-.8-.9-1.5-1.7-1.7C19.5 5.5 12 5.5 12 5.5s-7.5 0-8.9.5c-.8.2-1.5.9-1.7 1.7C1 9.1 1 12.2 1 12.2s0 3.1.4 4.5c.2.8.9 1.5 1.7 1.7 1.4.5 8.9.5 8.9.5s7.5 0 8.9-.5c.8-.2 1.5-.9 1.7-1.7.4-1.4.4-4.5.4-4.5zM9.8 15.5v-6.6l6.3 3.3-6.3 3.3z"/></svg>
+          <a href="https://wa.me/5562999739882?text=Ol%C3%A1%2C%20acessei%20o%20site%20da%20Sim%C3%B5es%20Engenharia%20e%20gostaria%20de%20fazer%20um%20or%C3%A7amento" aria-label="WhatsApp" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.47 14.38c-.27-.14-1.6-.79-1.85-.88-.25-.09-.43-.14-.61.14-.18.27-.7.88-.86 1.06-.16.18-.32.2-.59.07-.27-.14-1.14-.42-2.17-1.34-.8-.71-1.34-1.59-1.5-1.86-.16-.27-.02-.42.12-.55.12-.12.27-.32.41-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.14-.61-1.47-.84-2.01-.22-.53-.45-.46-.61-.46h-.52c-.18 0-.48.07-.73.34-.25.27-.96.94-.96 2.29s.98 2.65 1.12 2.83c.14.18 1.93 2.95 4.68 4.13.65.28 1.16.45 1.56.58.65.21 1.25.18 1.72.11.52-.08 1.6-.65 1.83-1.28.23-.63.23-1.17.16-1.28-.07-.11-.25-.18-.52-.32z"/><path d="M12.04 2C6.58 2 2.15 6.41 2.15 11.85c0 1.75.46 3.45 1.34 4.95L2 22l5.35-1.4a9.9 9.9 0 0 0 4.69 1.19h.01c5.46 0 9.89-4.41 9.89-9.85C21.94 6.41 17.5 2 12.04 2zm0 17.96h-.01a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.17.83.85-3.09-.2-.32a8.16 8.16 0 0 1-1.25-4.35c0-4.52 3.7-8.2 8.26-8.2 4.55 0 8.26 3.68 8.26 8.2 0 4.52-3.71 8.26-8.26 8.26z"/></svg>
           </a>
         </div>
       </div>
