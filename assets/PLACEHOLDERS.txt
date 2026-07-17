@@ -1,0 +1,40 @@
+# Imagens necessárias (WebP ~1600px no lado maior)
+# Coloque os arquivos nesta pasta com os nomes abaixo.
+# Enquanto ausentes, o site usa fallback em gradiente (onerror).
+
+# Home — Portfólio preview
+portfolio-residencial.webp
+portfolio-corporativo.webp
+portfolio-interiores.webp
+
+# Home — Posters de vídeo
+video-poster-tour.webp
+video-poster-entrega.webp
+
+# Home — CTA fechamento
+cta-bg.webp
+
+# Contato (opcional)
+contato-bg.webp
+
+# Cards de Serviços (já referenciados)
+servico-1.webp
+servico-2.webp
+servico-3.webp
+servico-4.webp
+
+# Página Portfólio — capas extras + galeria lightbox
+portfolio-campo.webp
+portfolio-campo-2.webp
+portfolio-lobby.webp
+portfolio-lobby-2.webp
+portfolio-cozinha.webp
+portfolio-cozinha-2.webp
+portfolio-residencial-2.webp
+portfolio-corporativo-2.webp
+portfolio-interiores-2.webp
+
+# Já existentes
+# 1.webp / 2.webp (hero), sobre.webp, servicos.webp
+
+# Direção visual: cinematográfico, pouca saturação, carvão/bege/madeira, accent #c4a574

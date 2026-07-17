@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Contato — Simões Engenharia & Interiores. Fale conosco por WhatsApp, e-mail ou formulário." />
+  <title>Contato — Simões Engenharia & Interiores</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #0a0c0f;
+      --bg-page: #f5f4f1;
+      --text: #141414;
+      --text-inv: #f4f2ee;
+      --muted: rgba(20, 20, 20, 0.62);
+      --line: rgba(20, 20, 20, 0.14);
+      --accent: #c4a574;
+      --gutter: clamp(1.25rem, 4vw, 4rem);
+      --max: 92rem;
+      --header-h: 4.5rem;
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+      --radius: clamp(0.9rem, 1.2vw, 1.15rem);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: "Outfit", sans-serif;
+      background: var(--bg-page);
+      color: var(--text);
+      line-height: 1.5;
+      min-height: 100dvh;
+    }
+    a { color: inherit; text-decoration: none; }
+    button, input, select, textarea { font: inherit; color: inherit; }
+    button { background: none; border: none; cursor: pointer; }
+
+    .logo {
+      font-family: "Syne", sans-serif;
+      font-weight: 800;
+      font-size: 1.15rem;
+      letter-spacing: -0.03em;
+      color: var(--text-inv);
+    }
+    .logo span { font-weight: 600; opacity: 0.72; margin-left: 0.35rem; }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(10, 12, 15, 0.92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(244, 242, 238, 0.08);
+    }
+    .site-header__inner {
+      width: min(100%, var(--max));
+      margin-inline: auto;
+      padding: 0 var(--gutter);
+      height: var(--header-h);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .site-nav { display: flex; gap: clamp(1rem, 2vw, 1.75rem); }
+    .site-nav a {
+      font-size: 0.9rem;
+      color: rgba(244, 242, 238, 0.72);
+      transition: color 0.25s;
+    }
+    .site-nav a:hover,
+    .site-nav a.is-active { color: #fff; }
+    .site-header__cta {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.55rem 1.1rem;
+      border-radius: 999px;
+      border: 1px solid rgba(244, 242, 238, 0.28);
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-inv);
+    }
+    .menu-toggle {
+      display: none;
+      place-items: center;
+      width: 2.5rem;
+      height: 2.5rem;
+      border: 1px solid rgba(244, 242, 238, 0.2);
+      border-radius: 50%;
+      color: var(--text-inv);
+    }
+    .menu-toggle span,
+    .menu-toggle span::before,
+    .menu-toggle span::after {
+      display: block;
+      width: 1rem;
+      height: 1.5px;
+      background: currentColor;
+      position: relative;
+    }
+    .menu-toggle span::before,
+    .menu-toggle span::after { content: ""; position: absolute; left: 0; }
+    .menu-toggle span::before { top: -5px; }
+    .menu-toggle span::after { top: 5px; }
+    .mobile-nav {
+      display: none;
+      flex-direction: column;
+      gap: 0.75rem;
+      padding: 1rem var(--gutter) 1.5rem;
+      background: #0a0c0f;
+    }
+    .mobile-nav.is-open { display: flex; }
+    .mobile-nav a { color: rgba(244, 242, 238, 0.8); }
+
+    @media (max-width: 799px) {
+      .site-nav, .site-header__cta { display: none; }
+      .menu-toggle { display: grid; }
+    }
+
+    .contact-page {
+      padding: clamp(3rem, 8vh, 5.5rem) var(--gutter) clamp(4rem, 8vh, 6rem);
+      background:
+        linear-gradient(180deg, rgba(245, 244, 241, 0.92), rgba(245, 244, 241, 0.97)),
+        url("assets/contato-bg.webp") center / cover no-repeat,
+        var(--bg-page);
+    }
+    .contact-page__inner {
+      width: min(100%, var(--max));
+      margin-inline: auto;
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: clamp(2rem, 5vw, 4.5rem);
+      align-items: start;
+    }
+
+    .contact-info h1 {
+      font-family: "Syne", sans-serif;
+      font-size: clamp(2rem, 4.5vw, 3rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+    .contact-info > p {
+      font-size: clamp(0.95rem, 1.4vw, 1.08rem);
+      font-weight: 300;
+      color: var(--muted);
+      max-width: 38ch;
+      margin-bottom: 2.25rem;
+      line-height: 1.55;
+    }
+
+    .contact-channels {
+      display: grid;
+      gap: 1.15rem;
+    }
+    .contact-channel {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.9rem;
+      padding: 0.25rem 0;
+    }
+    .contact-channel__icon {
+      flex-shrink: 0;
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      display: grid;
+      place-items: center;
+      color: #141414;
+    }
+    .contact-channel__icon svg {
+      width: 1.1rem;
+      height: 1.1rem;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.7;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .contact-channel__label {
+      display: block;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.2rem;
+    }
+    .contact-channel a,
+    .contact-channel span {
+      font-size: 1rem;
+      font-weight: 500;
+    }
+    .contact-channel a:hover { color: #000; text-decoration: underline; }
+
+    .contact-form {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: clamp(1.5rem, 3vw, 2.25rem);
+      box-shadow: 0 20px 50px rgba(20, 20, 20, 0.04);
+    }
+    .contact-form h2 {
+      font-family: "Syne", sans-serif;
+      font-size: clamp(1.15rem, 2vw, 1.35rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.35rem;
+    }
+    .form-field {
+      display: grid;
+      gap: 0.4rem;
+      margin-bottom: 1.1rem;
+    }
+    .form-field label {
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+    }
+    .form-field input,
+    .form-field select,
+    .form-field textarea {
+      width: 100%;
+      padding: 0.8rem 0.95rem;
+      border: 1px solid var(--line);
+      border-radius: 0.65rem;
+      background: #fafaf8;
+      transition: border-color 0.25s, background 0.25s;
+    }
+    .form-field input:focus,
+    .form-field select:focus,
+    .form-field textarea:focus {
+      outline: none;
+      border-color: rgba(20, 20, 20, 0.35);
+      background: #fff;
+    }
+    .form-field textarea { min-height: 7.5rem; resize: vertical; }
+    .form-field select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath stroke='%23141414' stroke-width='1.5' d='M1 1l5 5 5-5'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 0.9rem center; padding-right: 2.2rem; }
+
+    .form-submit {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.55rem;
+      width: 100%;
+      margin-top: 0.35rem;
+      padding: 0.95rem 1.25rem;
+      border-radius: 999px;
+      background: #141414;
+      color: #f4f2ee;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: background 0.25s, transform 0.25s;
+    }
+    .form-submit:hover {
+      background: #000;
+      transform: translateY(-1px);
+    }
+    .form-submit:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+    .form-note {
+      margin-top: 0.85rem;
+      font-size: 0.78rem;
+      font-weight: 300;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    @media (max-width: 899px) {
+      .contact-page__inner { grid-template-columns: 1fr; }
+    }
+
+    .site-footer {
+      background: #0a0c0f;
+      color: #f4f2ee;
+      padding: clamp(3rem, 7vh, 4.5rem) var(--gutter) 1.5rem;
+    }
+    .site-footer__grid {
+      width: min(100%, var(--max));
+      margin-inline: auto;
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr;
+      gap: clamp(2rem, 4vw, 3.5rem);
+      padding-bottom: clamp(2rem, 4vh, 3rem);
+    }
+    .site-footer__brand p {
+      margin-top: 0.85rem;
+      font-size: 0.92rem;
+      font-weight: 300;
+      color: rgba(244, 242, 238, 0.62);
+      max-width: 32ch;
+    }
+    .site-footer__col h3 {
+      font-family: "Syne", sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .site-footer__col nav { display: flex; flex-direction: column; gap: 0.55rem; }
+    .site-footer__col a {
+      font-size: 0.92rem;
+      font-weight: 300;
+      color: rgba(244, 242, 238, 0.62);
+    }
+    .site-footer__col a:hover { color: #fff; }
+    .site-footer__social { display: flex; gap: 0.75rem; }
+    .site-footer__social a {
+      display: grid;
+      place-items: center;
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      border: 1px solid rgba(244, 242, 238, 0.18);
+      color: #f4f2ee;
+    }
+    .site-footer__social svg { width: 1.05rem; height: 1.05rem; fill: currentColor; }
+    .site-footer__copy {
+      width: min(100%, var(--max));
+      margin-inline: auto;
+      padding-top: 1.25rem;
+      border-top: 1px solid rgba(244, 242, 238, 0.08);
+      font-size: 0.78rem;
+      color: rgba(244, 242, 238, 0.45);
+    }
+    @media (max-width: 799px) {
+      .site-footer__grid { grid-template-columns: 1fr; }
+    }
+
+    .wa-float {
+      position: fixed;
+      right: clamp(1rem, 3vw, 1.75rem);
+      bottom: clamp(1rem, 3vw, 1.75rem);
+      z-index: 90;
+      display: grid;
+      place-items: center;
+      width: 3.5rem;
+      height: 3.5rem;
+      border-radius: 50%;
+      background: #25d366;
+      color: #fff;
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
+    }
+    .wa-float:hover { transform: translateY(-3px) scale(1.04); }
+    .wa-float svg { width: 1.55rem; height: 1.55rem; fill: currentColor; }
+
+    @media (min-width: 1600px) { :root { --max: 110rem; } }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="logo" href="index.html">Simões<span>Engenharia</span></a>
+      <nav class="site-nav" aria-label="Principal">
+        <a href="index.html#projetos">Projetos</a>
+        <a href="index.html#servicos">Serviços</a>
+        <a href="index.html#missao-visao-valores">Sobre</a>
+        <a href="portfolio.html">Portfólio</a>
+        <a class="is-active" href="contato.html" aria-current="page">Contato</a>
+      </nav>
+      <a class="site-header__cta" href="https://wa.me/5562999739882?text=Ol%C3%A1%2C%20acessei%20o%20site%20da%20Sim%C3%B5es%20Engenharia%20e%20gostaria%20de%20fazer%20um%20or%C3%A7amento" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+      <button class="menu-toggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobile-nav">
+        <span></span>
+      </button>
+    </div>
+    <nav class="mobile-nav" id="mobile-nav" aria-label="Menu mobile">
+      <a href="index.html#projetos">Projetos</a>
+      <a href="index.html#servicos">Serviços</a>
+      <a href="index.html#missao-visao-valores">Sobre</a>
+      <a href="portfolio.html">Portfólio</a>
+      <a href="contato.html">Contato</a>
+    </nav>
+  </header>
+
+  <main class="contact-page">
+    <div class="contact-page__inner">
+      <div class="contact-info">
+        <h1>Vamos conversar?</h1>
+        <p>Escolha o canal mais confortável para você ou preencha o formulário ao lado para receber o contato da nossa equipe de engenharia.</p>
+
+        <div class="contact-channels">
+          <div class="contact-channel">
+            <span class="contact-channel__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z" /><path d="M4 7l8 6 8-6" /></svg>
+            </span>
+            <div>
+              <span class="contact-channel__label">E-mail</span>
+              <a href="mailto:monicapereirasimoes@gmail.com">monicapereirasimoes@gmail.com</a>
+            </div>
+          </div>
+
+          <div class="contact-channel">
+            <span class="contact-channel__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 21s7-4.5 7-11a7 7 0 1 0-14 0c0 6.5 7 11 7 11z" /><circle cx="12" cy="10" r="2.5" /></svg>
+            </span>
+            <div>
+              <span class="contact-channel__label">Localização</span>
+              <span>Trindade - Goiás</span>
+            </div>
+          </div>
+
+          <div class="contact-channel">
+            <span class="contact-channel__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.81.36 1.6.7 2.35a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.75.34 1.54.57 2.35.7A2 2 0 0 1 22 16.92z" /></svg>
+            </span>
+            <div>
+              <span class="contact-channel__label">WhatsApp</span>
+              <a href="https://wa.me/5562999739882" target="_blank" rel="noopener noreferrer">(62) 9 9973-9882</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <form class="contact-form" id="contact-form" novalidate>
+        <h2>Briefing rápido</h2>
+
+        <div class="form-field">
+          <label for="nome">Nome completo</label>
+          <input id="nome" name="nome" type="text" autocomplete="name" required placeholder="Seu nome" />
+        </div>
+
+        <div class="form-field">
+          <label for="telefone">WhatsApp / Telefone</label>
+          <input id="telefone" name="telefone" type="tel" autocomplete="tel" required placeholder="(62) 9 0000-0000" />
+        </div>
+
+        <div class="form-field">
+          <label for="tipo">Tipo de projeto</label>
+          <select id="tipo" name="tipo" required>
+            <option value="" disabled selected>Selecione uma opção</option>
+            <option value="Construção de Obra Nova">Construção de Obra Nova</option>
+            <option value="Reforma & Interiores">Reforma &amp; Interiores</option>
+            <option value="Apenas Projeto Estrutural">Apenas Projeto Estrutural</option>
+            <option value="Outros">Outros</option>
+          </select>
+        </div>
+
+        <div class="form-field">
+          <label for="mensagem">Mensagem / Conte-nos brevemente sobre sua ideia</label>
+          <textarea id="mensagem" name="mensagem" required placeholder="Descreva o projeto, localização e prazo desejado..."></textarea>
+        </div>
+
+        <button class="form-submit" type="submit">Enviar Mensagem e Iniciar Projeto</button>
+        <p class="form-note">O envio abre uma conversa no WhatsApp com seus dados preenchidos.</p>
+      </form>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer__grid">
+      <div class="site-footer__brand">
+        <a class="logo" href="index.html">Simões<span>Engenharia</span></a>
+        <p>Fusão de engenharia de precisão e design de interiores — do cálculo à entrega das chaves.</p>
+      </div>
+      <div class="site-footer__col">
+        <h3>Navegação</h3>
+        <nav aria-label="Rodapé">
+          <a href="index.html">Home</a>
+          <a href="index.html#missao-visao-valores">Quem Somos</a>
+          <a href="index.html#servicos">Serviços</a>
+          <a href="portfolio.html">Portfólio</a>
+          <a href="contato.html">Contato</a>
+        </nav>
+      </div>
+      <div class="site-footer__col">
+        <h3>Redes</h3>
+        <div class="site-footer__social">
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm5 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm6.5-.9a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2zM12 9a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/></svg></a>
+          <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M14 9h3V6h-3c-1.7 0-3 1.3-3 3v2H8v3h3v7h3v-7h3l1-3h-4V9c0-.6.4-1 1-1z"/></svg></a>
+          <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M23 12.2s0-3.1-.4-4.5c-.2-.8-.9-1.5-1.7-1.7C19.5 5.5 12 5.5 12 5.5s-7.5 0-8.9.5c-.8.2-1.5.9-1.7 1.7C1 9.1 1 12.2 1 12.2s0 3.1.4 4.5c.2.8.9 1.5 1.7 1.7 1.4.5 8.9.5 8.9.5s7.5 0 8.9-.5c.8-.2 1.5-.9 1.7-1.7.4-1.4.4-4.5.4-4.5zM9.8 15.5v-6.6l6.3 3.3-6.3 3.3z"/></svg></a>
+        </div>
+      </div>
+    </div>
+    <p class="site-footer__copy">© 2026 Simões Engenharia &amp; Interiores. Todos os direitos reservados.</p>
+  </footer>
+
+  <a class="wa-float" href="https://wa.me/5562999739882?text=Ol%C3%A1%2C%20acessei%20o%20site%20da%20Sim%C3%B5es%20Engenharia%20e%20gostaria%20de%20fazer%20um%20or%C3%A7amento" target="_blank" rel="noopener noreferrer" aria-label="Falar no WhatsApp">
+    <svg viewBox="0 0 24 24"><path d="M17.47 14.38c-.27-.14-1.6-.79-1.85-.88-.25-.09-.43-.14-.61.14-.18.27-.7.88-.86 1.06-.16.18-.32.2-.59.07-.27-.14-1.14-.42-2.17-1.34-.8-.71-1.34-1.59-1.5-1.86-.16-.27-.02-.42.12-.55.12-.12.27-.32.41-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.14-.61-1.47-.84-2.01-.22-.53-.45-.46-.61-.46h-.52c-.18 0-.48.07-.73.34-.25.27-.96.94-.96 2.29s.98 2.65 1.12 2.83c.14.18 1.93 2.95 4.68 4.13.65.28 1.16.45 1.56.58.65.21 1.25.18 1.72.11.52-.08 1.6-.65 1.83-1.28.23-.63.23-1.17.16-1.28-.07-.11-.25-.18-.52-.32z"/><path d="M12.04 2C6.58 2 2.15 6.41 2.15 11.85c0 1.75.46 3.45 1.34 4.95L2 22l5.35-1.4a9.9 9.9 0 0 0 4.69 1.19h.01c5.46 0 9.89-4.41 9.89-9.85C21.94 6.41 17.5 2 12.04 2zm0 17.96h-.01a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.17.83.85-3.09-.2-.32a8.16 8.16 0 0 1-1.25-4.35c0-4.52 3.7-8.2 8.26-8.2 4.55 0 8.26 3.68 8.26 8.2 0 4.52-3.71 8.26-8.26 8.26z"/></svg>
+  </a>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const toggle = document.querySelector(".menu-toggle");
+      const mobileNav = document.getElementById("mobile-nav");
+      if (toggle && mobileNav) {
+        toggle.addEventListener("click", () => {
+          const open = toggle.getAttribute("aria-expanded") === "true";
+          toggle.setAttribute("aria-expanded", String(!open));
+          mobileNav.classList.toggle("is-open", !open);
+        });
+      }
+
+      const form = document.getElementById("contact-form");
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
+
+        const nome = form.nome.value.trim();
+        const telefone = form.telefone.value.trim();
+        const tipo = form.tipo.value;
+        const mensagem = form.mensagem.value.trim();
+
+        const text = [
+          "Olá! Gostaria de iniciar um projeto.",
+          `Nome: ${nome}`,
+          `Telefone: ${telefone}`,
+          `Tipo: ${tipo}`,
+          `Mensagem: ${mensagem}`,
+        ].join("\n");
+
+        const url = `https://wa.me/5562999739882?text=${encodeURIComponent(text)}`;
+        window.open(url, "_blank", "noopener,noreferrer");
+      });
+    });
+  </script>
+</body>
+</html>

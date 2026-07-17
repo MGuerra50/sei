@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Portfólio — Simões Engenharia & Interiores. Acervo de projetos residenciais, comerciais e de interiores." />
+  <title>Portfólio — Simões Engenharia & Interiores</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #0a0c0f;
+      --bg-page: #f5f4f1;
+      --text: #141414;
+      --text-inv: #f4f2ee;
+      --muted: rgba(20, 20, 20, 0.62);
+      --line: rgba(20, 20, 20, 0.12);
+      --accent: #c4a574;
+      --gutter: clamp(1.25rem, 4vw, 4rem);
+      --max: 92rem;
+      --header-h: 4.5rem;
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+      --radius: clamp(0.9rem, 1.2vw, 1.15rem);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body {
+      font-family: "Outfit", sans-serif;
+      background: var(--bg-page);
+      color: var(--text);
+      line-height: 1.5;
+      min-height: 100dvh;
+    }
+    img { display: block; max-width: 100%; height: auto; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
+
+    .logo {
+      font-family: "Syne", sans-serif;
+      font-weight: 800;
+      font-size: 1.15rem;
+      letter-spacing: -0.03em;
+      color: var(--text-inv);
+    }
+    .logo span { font-weight: 600; opacity: 0.72; margin-left: 0.35rem; }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(10, 12, 15, 0.92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(244, 242, 238, 0.08);
+    }
+    .site-header__inner {
+      width: min(100%, var(--max));
+      margin-inline: auto;
+      padding: 0 var(--gutter);
+      height: var(--header-h);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .site-nav {
+      display: flex;
+      gap: clamp(1rem, 2vw, 1.75rem);
+    }
+    .site-nav a {
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: rgba(244, 242, 238, 0.72);
+      transition: color 0.25s;
+    }
+    .site-nav a:hover,
+    .site-nav a.is-active { color: #fff; }
+    .site-header__cta {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.55rem 1.1rem;
+      border-radius: 999px;
+      border: 1px solid rgba(244, 242, 238, 0.28);
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-inv);
+      transition: background 0.25s, border-color 0.25s;
+    }
+    .site-header__cta:hover {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(244, 242, 238, 0.5);
+    }
+    .menu-toggle {
+      display: none;
+      place-items: center;
+      width: 2.5rem;
+      height: 2.5rem;
+      border: 1px solid rgba(244, 242, 238, 0.2);
+      border-radius: 50%;
+      color: var(--text-inv);
+    }
+    .menu-toggle span,
+    .menu-toggle span::before,
+    .menu-toggle span::after {
+      display: block;
+      width: 1rem;
+      height: 1.5px;
+      background: currentColor;
+      position: relative;
+    }
+    .menu-toggle span::before,
+    .menu-toggle span::after { content: ""; position: absolute; left: 0; }
+    .menu-toggle span::before { top: -5px; }
+    .menu-toggle span::after { top: 5px; }
+    .mobile-nav {
+      display: none;
+      flex-direction: column;
+      gap: 0.75rem;
+      padding: 1rem var(--gutter) 1.5rem;
+      background: #0a0c0f;
+      border-bottom: 1px solid rgba(244, 242, 238, 0.08);
+    }
+    .mobile-nav.is-open { display: flex; }
+    .mobile-nav a { color: rgba(244, 242, 238, 0.8); font-size: 1rem; }
+
+    @media (max-width: 799px) {
+      .site-nav, .site-header__cta { display: none; }
+      .menu-toggle { display: grid; }
+    }
+
+    .pf-hero {
+      padding: clamp(3.5rem, 8vh, 5.5rem) var(--gutter) clamp(2rem, 4vh, 3rem);
+      background: var(--bg);
+      color: var(--text-inv);
+    }
+    .pf-hero__inner {
+      width: min(100%, var(--max));
+      margin-inline: auto;
+      max-width: 40rem;
+    }
+    .pf-hero h1 {
+      font-family: "Syne", sans-serif;
+      font-size: clamp(2rem, 5vw, 3.25rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 0.85rem;
+    }
+    .pf-hero p {
+      font-size: clamp(0.95rem, 1.4vw, 1.1rem);
+      font-weight: 300;
+      color: rgba(244, 242, 238, 0.68);
+      max-width: 36ch;
+    }
+
+    .pf-main {
+      padding: clamp(2rem, 5vh, 3.5rem) var(--gutter) clamp(4rem, 8vh, 6rem);
+    }
+    .pf-main__inner {
+      width: min(100%, var(--max));
+      margin-inline: auto;
+    }
+
+    .pf-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: clamp(1.75rem, 4vh, 2.75rem);
+    }
+    .pf-filter {
+      padding: 0.55rem 1rem;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--muted);
+      background: transparent;
+      transition: background 0.25s, color 0.25s, border-color 0.25s;
+    }
+    .pf-filter:hover { color: var(--text); border-color: rgba(20, 20, 20, 0.28); }
+    .pf-filter.is-active {
+      background: #141414;
+      color: #f4f2ee;
+      border-color: #141414;
+    }
+
+    .pf-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(0.85rem, 1.6vw, 1.35rem);
+    }
+    .pf-item {
+      position: relative;
+      display: block;
+      width: 100%;
+      text-align: left;
+      border-radius: var(--radius);
+      overflow: hidden;
+      isolation: isolate;
+      aspect-ratio: 4 / 5;
+      background: linear-gradient(145deg, #2a2e34, #1a1d22 55%, #3d3428);
+      color: var(--text-inv);
+      cursor: pointer;
+    }
+    .pf-item.is-hidden { display: none; }
+    .pf-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 1s var(--ease);
+    }
+    .pf-item__overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 35%, rgba(10,12,15,0.82) 100%);
+      z-index: 1;
+    }
+    .pf-item__body {
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      z-index: 2;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+    .pf-item__tag {
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(244, 242, 238, 0.7);
+    }
+    .pf-item__title {
+      font-family: "Syne", sans-serif;
+      font-size: clamp(1rem, 1.3vw, 1.15rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+    }
+    .pf-item:hover img { transform: scale(1.05); }
+    .pf-item:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    @media (max-width: 999px) {
+      .pf-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 639px) {
+      .pf-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Lightbox */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1.25rem;
+      background: rgba(10, 12, 15, 0.82);
+      backdrop-filter: blur(8px);
+    }
+    .lightbox.is-open { display: flex; }
+    .lightbox__panel {
+      width: min(100%, 56rem);
+      max-height: min(90dvh, 44rem);
+      overflow: auto;
+      background: #f5f4f1;
+      color: #141414;
+      border-radius: var(--radius);
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+    }
+    .lightbox__gallery {
+      background: #1a1d22;
+      min-height: 16rem;
+      display: grid;
+      gap: 0.35rem;
+      padding: 0.35rem;
+    }
+    .lightbox__gallery img {
+      width: 100%;
+      height: 100%;
+      min-height: 10rem;
+      object-fit: cover;
+      border-radius: calc(var(--radius) - 0.25rem);
+    }
+    .lightbox__info { padding: clamp(1.25rem, 3vw, 2rem); }
+    .lightbox__info h2 {
+      font-family: "Syne", sans-serif;
+      font-size: clamp(1.25rem, 2.5vw, 1.65rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+    }
+    .lightbox__tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.25rem;
+    }
+    .lightbox__tags span {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.65rem;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      color: var(--muted);
+    }
+    .lightbox__meta {
+      display: grid;
+      gap: 0.85rem;
+      font-size: 0.92rem;
+    }
+    .lightbox__meta dt {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.2rem;
+    }
+    .lightbox__meta dd { font-weight: 400; }
+    .lightbox__close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 2.75rem;
+      height: 2.75rem;
+      border-radius: 50%;
+      border: 1px solid rgba(244, 242, 238, 0.3);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      background: rgba(10, 12, 15, 0.5);
+    }
+    .lightbox__close:hover { background: rgba(10, 12, 15, 0.75); }
+    .lightbox__close svg { width: 1.1rem; height: 1.1rem; stroke: currentColor; fill: none; stroke-width: 2; }
+
+    @media (max-width: 799px) {
+      .lightbox__panel { grid-template-columns: 1fr; max-height: 92dvh; }
+      .lightbox__gallery { min-height: 12rem; }
+    }
+
+    /* Footer + WA (shared) */
+    .site-footer {
+      background: #0a0c0f;
+      color: #f4f2ee;
+      padding: clamp(3rem, 7vh, 4.5rem) var(--gutter) 1.5rem;
+      border-top: 1px solid rgba(244, 242, 238, 0.08);
+    }
+    .site-footer__grid {
+      width: min(100%, var(--max));
+      margin-inline: auto;
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr;
+      gap: clamp(2rem, 4vw, 3.5rem);
+      padding-bottom: clamp(2rem, 4vh, 3rem);
+    }
+    .site-footer__brand p {
+      margin-top: 0.85rem;
+      font-size: 0.92rem;
+      font-weight: 300;
+      color: rgba(244, 242, 238, 0.62);
+      max-width: 32ch;
+    }
+    .site-footer__col h3 {
+      font-family: "Syne", sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .site-footer__col nav { display: flex; flex-direction: column; gap: 0.55rem; }
+    .site-footer__col a {
+      font-size: 0.92rem;
+      font-weight: 300;
+      color: rgba(244, 242, 238, 0.62);
+    }
+    .site-footer__col a:hover { color: #fff; }
+    .site-footer__social { display: flex; gap: 0.75rem; }
+    .site-footer__social a {
+      display: grid;
+      place-items: center;
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      border: 1px solid rgba(244, 242, 238, 0.18);
+      color: #f4f2ee;
+    }
+    .site-footer__social svg { width: 1.05rem; height: 1.05rem; fill: currentColor; }
+    .site-footer__copy {
+      width: min(100%, var(--max));
+      margin-inline: auto;
+      padding-top: 1.25rem;
+      border-top: 1px solid rgba(244, 242, 238, 0.08);
+      font-size: 0.78rem;
+      color: rgba(244, 242, 238, 0.45);
+    }
+    @media (max-width: 799px) {
+      .site-footer__grid { grid-template-columns: 1fr; }
+    }
+
+    .wa-float {
+      position: fixed;
+      right: clamp(1rem, 3vw, 1.75rem);
+      bottom: clamp(1rem, 3vw, 1.75rem);
+      z-index: 90;
+      display: grid;
+      place-items: center;
+      width: 3.5rem;
+      height: 3.5rem;
+      border-radius: 50%;
+      background: #25d366;
+      color: #fff;
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
+      transition: transform 0.3s var(--ease);
+    }
+    .wa-float:hover { transform: translateY(-3px) scale(1.04); }
+    .wa-float svg { width: 1.55rem; height: 1.55rem; fill: currentColor; }
+
+    @media (min-width: 1600px) { :root { --max: 110rem; } }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="logo" href="index.html">Simões<span>Engenharia</span></a>
+      <nav class="site-nav" aria-label="Principal">
+        <a href="index.html#projetos">Projetos</a>
+        <a href="index.html#servicos">Serviços</a>
+        <a href="index.html#missao-visao-valores">Sobre</a>
+        <a class="is-active" href="portfolio.html" aria-current="page">Portfólio</a>
+        <a href="contato.html">Contato</a>
+      </nav>
+      <a class="site-header__cta" href="contato.html">Agendar consulta</a>
+      <button class="menu-toggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobile-nav">
+        <span></span>
+      </button>
+    </div>
+    <nav class="mobile-nav" id="mobile-nav" aria-label="Menu mobile">
+      <a href="index.html#projetos">Projetos</a>
+      <a href="index.html#servicos">Serviços</a>
+      <a href="index.html#missao-visao-valores">Sobre</a>
+      <a href="portfolio.html">Portfólio</a>
+      <a href="contato.html">Contato</a>
+    </nav>
+  </header>
+
+  <section class="pf-hero">
+    <div class="pf-hero__inner">
+      <h1>Nosso Acervo de Realizações</h1>
+      <p>Uma linha do tempo composta por rigor matemático e sensibilidade estética.</p>
+    </div>
+  </section>
+
+  <main class="pf-main">
+    <div class="pf-main__inner">
+      <div class="pf-filters" role="toolbar" aria-label="Filtrar projetos">
+        <button class="pf-filter is-active" type="button" data-filter="all">Todos</button>
+        <button class="pf-filter" type="button" data-filter="estrutural">Engenharia Estrutural</button>
+        <button class="pf-filter" type="button" data-filter="interiores">Design de Interiores</button>
+        <button class="pf-filter" type="button" data-filter="residencial">Residencial</button>
+        <button class="pf-filter" type="button" data-filter="comercial">Comercial</button>
+      </div>
+
+      <div class="pf-grid" id="pf-grid">
+        <button
+          class="pf-item"
+          type="button"
+          data-category="residencial estrutural interiores"
+          data-title="Residência Alphaville"
+          data-tags="Engenharia & Interiores,Residencial"
+          data-area="420 m²"
+          data-location="Alphaville, GO"
+          data-solutions="Gestão técnica integrada, compatibilização estrutural e design de interiores ponta a ponta."
+          data-images="assets/portfolio-residencial.webp|assets/portfolio-residencial-2.webp"
+        >
+          <img src="assets/portfolio-residencial.webp" alt="" width="800" height="1000" loading="lazy" onerror="this.style.display='none'" />
+          <span class="pf-item__overlay" aria-hidden="true"></span>
+          <span class="pf-item__body">
+            <span class="pf-item__tag">Engenharia &amp; Interiores</span>
+            <span class="pf-item__title">Residência Alphaville</span>
+          </span>
+        </button>
+
+        <button
+          class="pf-item"
+          type="button"
+          data-category="comercial estrutural"
+          data-title="Escritório Corporativo CMI"
+          data-tags="Engenharia Civil,Comercial"
+          data-area="680 m²"
+          data-location="Goiânia, GO"
+          data-solutions="Precisão estrutural, otimização de layout e execução com controle de prazo."
+          data-images="assets/portfolio-corporativo.webp|assets/portfolio-corporativo-2.webp"
+        >
+          <img src="assets/portfolio-corporativo.webp" alt="" width="800" height="1000" loading="lazy" onerror="this.style.display='none'" />
+          <span class="pf-item__overlay" aria-hidden="true"></span>
+          <span class="pf-item__body">
+            <span class="pf-item__tag">Engenharia Civil</span>
+            <span class="pf-item__title">Escritório Corporativo CMI</span>
+          </span>
+        </button>
+
+        <button
+          class="pf-item"
+          type="button"
+          data-category="residencial interiores"
+          data-title="Apartamento Design"
+          data-tags="Design de Interiores,Residencial"
+          data-area="145 m²"
+          data-location="Trindade, GO"
+          data-solutions="Texturas finas, iluminação linear e materialidade premium no living e suítes."
+          data-images="assets/portfolio-interiores.webp|assets/portfolio-interiores-2.webp"
+        >
+          <img src="assets/portfolio-interiores.webp" alt="" width="800" height="1000" loading="lazy" onerror="this.style.display='none'" />
+          <span class="pf-item__overlay" aria-hidden="true"></span>
+          <span class="pf-item__body">
+            <span class="pf-item__tag">Design de Interiores</span>
+            <span class="pf-item__title">Apartamento Design</span>
+          </span>
+        </button>
+
+        <button
+          class="pf-item"
+          type="button"
+          data-category="residencial estrutural"
+          data-title="Casa Campo Serra"
+          data-tags="Engenharia Estrutural,Residencial"
+          data-area="310 m²"
+          data-location="Interior de Goiás"
+          data-solutions="Fundações especiais, estrutura aparente e integração com o terreno."
+          data-images="assets/portfolio-campo.webp|assets/portfolio-campo-2.webp"
+        >
+          <img src="assets/portfolio-campo.webp" alt="" width="800" height="1000" loading="lazy" onerror="this.style.display='none'" />
+          <span class="pf-item__overlay" aria-hidden="true"></span>
+          <span class="pf-item__body">
+            <span class="pf-item__tag">Engenharia Estrutural</span>
+            <span class="pf-item__title">Casa Campo Serra</span>
+          </span>
+        </button>
+
+        <button
+          class="pf-item"
+          type="button"
+          data-category="comercial interiores"
+          data-title="Lobby Comercial Norte"
+          data-tags="Design de Interiores,Comercial"
+          data-area="220 m²"
+          data-location="Goiânia, GO"
+          data-solutions="Recepção corporativa com identidade visual, iluminação cênica e fluxo otimizado."
+          data-images="assets/portfolio-lobby.webp|assets/portfolio-lobby-2.webp"
+        >
+          <img src="assets/portfolio-lobby.webp" alt="" width="800" height="1000" loading="lazy" onerror="this.style.display='none'" />
+          <span class="pf-item__overlay" aria-hidden="true"></span>
+          <span class="pf-item__body">
+            <span class="pf-item__tag">Comercial</span>
+            <span class="pf-item__title">Lobby Comercial Norte</span>
+          </span>
+        </button>
+
+        <button
+          class="pf-item"
+          type="button"
+          data-category="residencial interiores"
+          data-title="Cozinha Gourmet Horizon"
+          data-tags="Design de Interiores,Residencial"
+          data-area="48 m²"
+          data-location="Alphaville, GO"
+          data-solutions="Ilha central, marcenaria sob medida e iluminação de tarefa integrada."
+          data-images="assets/portfolio-cozinha.webp|assets/portfolio-cozinha-2.webp"
+        >
+          <img src="assets/portfolio-cozinha.webp" alt="" width="800" height="1000" loading="lazy" onerror="this.style.display='none'" />
+          <span class="pf-item__overlay" aria-hidden="true"></span>
+          <span class="pf-item__body">
+            <span class="pf-item__tag">Design de Interiores</span>
+            <span class="pf-item__title">Cozinha Gourmet Horizon</span>
+          </span>
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-labelledby="lightbox-title" hidden>
+    <button class="lightbox__close" type="button" aria-label="Fechar">
+      <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12" /></svg>
+    </button>
+    <div class="lightbox__panel">
+      <div class="lightbox__gallery" id="lightbox-gallery"></div>
+      <div class="lightbox__info">
+        <h2 id="lightbox-title"></h2>
+        <div class="lightbox__tags" id="lightbox-tags"></div>
+        <dl class="lightbox__meta">
+          <div>
+            <dt>Metragem</dt>
+            <dd id="lightbox-area"></dd>
+          </div>
+          <div>
+            <dt>Localização</dt>
+            <dd id="lightbox-location"></dd>
+          </div>
+          <div>
+            <dt>Soluções aplicadas</dt>
+            <dd id="lightbox-solutions"></dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="site-footer__grid">
+      <div class="site-footer__brand">
+        <a class="logo" href="index.html">Simões<span>Engenharia</span></a>
+        <p>Fusão de engenharia de precisão e design de interiores — do cálculo à entrega das chaves.</p>
+      </div>
+      <div class="site-footer__col">
+        <h3>Navegação</h3>
+        <nav aria-label="Rodapé">
+          <a href="index.html">Home</a>
+          <a href="index.html#missao-visao-valores">Quem Somos</a>
+          <a href="index.html#servicos">Serviços</a>
+          <a href="portfolio.html">Portfólio</a>
+          <a href="contato.html">Contato</a>
+        </nav>
+      </div>
+      <div class="site-footer__col">
+        <h3>Redes</h3>
+        <div class="site-footer__social">
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm5 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm6.5-.9a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2zM12 9a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/></svg></a>
+          <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M14 9h3V6h-3c-1.7 0-3 1.3-3 3v2H8v3h3v7h3v-7h3l1-3h-4V9c0-.6.4-1 1-1z"/></svg></a>
+          <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M23 12.2s0-3.1-.4-4.5c-.2-.8-.9-1.5-1.7-1.7C19.5 5.5 12 5.5 12 5.5s-7.5 0-8.9.5c-.8.2-1.5.9-1.7 1.7C1 9.1 1 12.2 1 12.2s0 3.1.4 4.5c.2.8.9 1.5 1.7 1.7 1.4.5 8.9.5 8.9.5s7.5 0 8.9-.5c.8-.2 1.5-.9 1.7-1.7.4-1.4.4-4.5.4-4.5zM9.8 15.5v-6.6l6.3 3.3-6.3 3.3z"/></svg></a>
+        </div>
+      </div>
+    </div>
+    <p class="site-footer__copy">© 2026 Simões Engenharia &amp; Interiores. Todos os direitos reservados.</p>
+  </footer>
+
+  <a class="wa-float" href="https://wa.me/5562999739882?text=Ol%C3%A1%2C%20acessei%20o%20site%20da%20Sim%C3%B5es%20Engenharia%20e%20gostaria%20de%20fazer%20um%20or%C3%A7amento" target="_blank" rel="noopener noreferrer" aria-label="Falar no WhatsApp">
+    <svg viewBox="0 0 24 24"><path d="M17.47 14.38c-.27-.14-1.6-.79-1.85-.88-.25-.09-.43-.14-.61.14-.18.27-.7.88-.86 1.06-.16.18-.32.2-.59.07-.27-.14-1.14-.42-2.17-1.34-.8-.71-1.34-1.59-1.5-1.86-.16-.27-.02-.42.12-.55.12-.12.27-.32.41-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.14-.61-1.47-.84-2.01-.22-.53-.45-.46-.61-.46h-.52c-.18 0-.48.07-.73.34-.25.27-.96.94-.96 2.29s.98 2.65 1.12 2.83c.14.18 1.93 2.95 4.68 4.13.65.28 1.16.45 1.56.58.65.21 1.25.18 1.72.11.52-.08 1.6-.65 1.83-1.28.23-.63.23-1.17.16-1.28-.07-.11-.25-.18-.52-.32z"/><path d="M12.04 2C6.58 2 2.15 6.41 2.15 11.85c0 1.75.46 3.45 1.34 4.95L2 22l5.35-1.4a9.9 9.9 0 0 0 4.69 1.19h.01c5.46 0 9.89-4.41 9.89-9.85C21.94 6.41 17.5 2 12.04 2zm0 17.96h-.01a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.17.83.85-3.09-.2-.32a8.16 8.16 0 0 1-1.25-4.35c0-4.52 3.7-8.2 8.26-8.2 4.55 0 8.26 3.68 8.26 8.2 0 4.52-3.71 8.26-8.26 8.26z"/></svg>
+  </a>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const toggle = document.querySelector(".menu-toggle");
+      const mobileNav = document.getElementById("mobile-nav");
+      if (toggle && mobileNav) {
+        toggle.addEventListener("click", () => {
+          const open = toggle.getAttribute("aria-expanded") === "true";
+          toggle.setAttribute("aria-expanded", String(!open));
+          mobileNav.classList.toggle("is-open", !open);
+        });
+      }
+
+      const filters = document.querySelectorAll(".pf-filter");
+      const items = document.querySelectorAll(".pf-item");
+      filters.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          filters.forEach((b) => b.classList.remove("is-active"));
+          btn.classList.add("is-active");
+          const filter = btn.dataset.filter;
+          items.forEach((item) => {
+            const cats = (item.dataset.category || "").split(/\s+/);
+            const show = filter === "all" || cats.includes(filter);
+            item.classList.toggle("is-hidden", !show);
+          });
+        });
+      });
+
+      const lightbox = document.getElementById("lightbox");
+      const gallery = document.getElementById("lightbox-gallery");
+      const titleEl = document.getElementById("lightbox-title");
+      const tagsEl = document.getElementById("lightbox-tags");
+      const areaEl = document.getElementById("lightbox-area");
+      const locEl = document.getElementById("lightbox-location");
+      const solEl = document.getElementById("lightbox-solutions");
+      const closeBtn = lightbox.querySelector(".lightbox__close");
+
+      const openLightbox = (item) => {
+        titleEl.textContent = item.dataset.title || "";
+        areaEl.textContent = item.dataset.area || "—";
+        locEl.textContent = item.dataset.location || "—";
+        solEl.textContent = item.dataset.solutions || "—";
+        tagsEl.innerHTML = "";
+        (item.dataset.tags || "").split(",").filter(Boolean).forEach((tag) => {
+          const span = document.createElement("span");
+          span.textContent = tag.trim();
+          tagsEl.appendChild(span);
+        });
+        gallery.innerHTML = "";
+        const imgs = (item.dataset.images || "").split("|").filter(Boolean);
+        if (!imgs.length) {
+          gallery.innerHTML = '<div style="min-height:12rem;background:linear-gradient(145deg,#2a2e34,#3d3428)"></div>';
+        } else {
+          imgs.forEach((src) => {
+            const img = document.createElement("img");
+            img.src = src;
+            img.alt = "";
+            img.loading = "lazy";
+            img.onerror = () => { img.style.display = "none"; };
+            gallery.appendChild(img);
+          });
+        }
+        lightbox.hidden = false;
+        lightbox.classList.add("is-open");
+        document.body.style.overflow = "hidden";
+        closeBtn.focus();
+      };
+
+      const closeLightbox = () => {
+        lightbox.classList.remove("is-open");
+        lightbox.hidden = true;
+        document.body.style.overflow = "";
+      };
+
+      items.forEach((item) => item.addEventListener("click", () => openLightbox(item)));
+      closeBtn.addEventListener("click", closeLightbox);
+      lightbox.addEventListener("click", (e) => {
+        if (e.target === lightbox) closeLightbox();
+      });
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && lightbox.classList.contains("is-open")) closeLightbox();
+      });
+    });
+  </script>
+</body>
+</html>
